@@ -8,17 +8,17 @@ import { CATEGORY_LABELS, Complaint, ComplaintCategory } from '@/types';
 import { formatDate, formatRelativeTime } from '@/lib/utils';
 import ComplaintLocationMap from '@/components/map/ComplaintLocationMapClient';
 import RepresentativesCard from '@/components/brutal/RepresentativesCard';
+import { getDb } from '@/lib/mongodb';
 
 async function getComplaint(id: string): Promise<Complaint | null> {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/complaints/${id}`,
-      { cache: 'no-store' }
-    );
-    if (!res.ok) return null;
-    return res.json();
+    const db = await getDb();
+    const complaintsCollection = db.collection<Complaint>('complaints');
+    const normalizedId = id.trim().toUpperCase();
+
+    return await complaintsCollection.findOne({ complaintId: normalizedId });
   } catch (error) {
-    console.error('Failed to fetch complaint:', error);
+    console.error('Failed to fetch complaint from database:', error);
     return null;
   }
 }
