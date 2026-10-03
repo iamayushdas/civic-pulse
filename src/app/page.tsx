@@ -7,6 +7,7 @@ import { Ticker } from '@/components/layout/Ticker';
 import { CATEGORY_LABELS, ComplaintCategory } from '@/types';
 import { formatRelativeTime } from '@/lib/utils';
 import { AnimatedMetro, AnimatedBus, AnimatedAutoRickshaw, AnimatedDTCBus, AnimatedCycleRickshaw, AnimatedWaterTanker } from '@/components/home/AnimatedVehicles';
+import { getDb } from '@/lib/mongodb';
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';
@@ -14,15 +15,47 @@ export const revalidate = 0;
 
 async function getStats() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : 'http://localhost:3000';
+    const db = await getDb();
+    const complaintsCollection = db.collection('complaints');
     
-    const res = await fetch(`${baseUrl}/api/stats`, {
-      cache: 'no-store',
+    const [total, byStatus, byCategory, thisWeek, resolved] = await Promise.all([
+      complaintsCollection.countDocuments(),
+      complaintsCollection.aggregate([
+        { $group: { _id: '$status', count: { $sum: 1 } } }
+      ]).toArray(),
+      complaintsCollection.aggregate([
+        { $group: { _id: '$category', count: { $sum: 1 } } }
+      ]).toArray(),
+      complaintsCollection.countDocuments({
+        createdAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) }
+      }),
+      complaintsCollection.countDocuments({ status: 'RESOLVED' })
+    ]);
+
+    const statusMap = byStatus.reduce((acc: any, item: any) => {
+      acc[item._id] = item.count;
+      return acc;
+    }, {
+      SUBMITTED: 0,
+      VERIFIED: 0,
+      ASSIGNED: 0,
+      IN_PROGRESS: 0,
+      RESOLVED: 0
     });
-    if (!res.ok) throw new Error('Failed to fetch stats');
-    return res.json();
+
+    const categoryMap = byCategory.reduce((acc: any, item: any) => {
+      acc[item._id] = item.count;
+      return acc;
+    }, {});
+
+    return {
+      total,
+      open: total - resolved,
+      resolved,
+      thisWeek,
+      byStatus: statusMap,
+      byCategory: categoryMap
+    };
   } catch (error) {
     console.error('Failed to fetch stats:', error);
     return null;
@@ -31,17 +64,21 @@ async function getStats() {
 
 async function getRecentComplaints() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : 'http://localhost:3000';
+    const db = await getDb();
+    const complaintsCollection = db.collection('complaints');
     
-    const res = await fetch(
-      `${baseUrl}/api/complaints?limit=8&sortBy=createdAt&sortOrder=desc`,
-      { cache: 'no-store' }
-    );
-    if (!res.ok) throw new Error('Failed to fetch complaints');
-    const data = await res.json();
-    return data.complaints;
+    const complaints = await complaintsCollection
+      .find()
+      .sort({ createdAt: -1 })
+      .limit(8)
+      .toArray();
+    
+    return complaints.map((c: any) => ({
+      ...c,
+      _id: c._id.toString(),
+      createdAt: c.createdAt.toISOString(),
+      updatedAt: c.updatedAt.toISOString()
+    }));
   } catch (error) {
     console.error('Failed to fetch recent complaints:', error);
     return [];

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { LayoutDashboard, FileText, Map, Building2, Users, Settings } from 'lucide-react';
 import { Card, CardContent } from '@/components/brutal/Card';
+import { getDb } from '@/lib/mongodb';
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';
@@ -8,15 +9,47 @@ export const revalidate = 0;
 
 async function getAdminStats() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : 'http://localhost:3000';
+    const db = await getDb();
+    const complaintsCollection = db.collection('complaints');
     
-    const res = await fetch(`${baseUrl}/api/stats`, {
-      cache: 'no-store',
+    const [total, byStatus, byCategory, thisWeek, resolved] = await Promise.all([
+      complaintsCollection.countDocuments(),
+      complaintsCollection.aggregate([
+        { $group: { _id: '$status', count: { $sum: 1 } } }
+      ]).toArray(),
+      complaintsCollection.aggregate([
+        { $group: { _id: '$category', count: { $sum: 1 } } }
+      ]).toArray(),
+      complaintsCollection.countDocuments({
+        createdAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) }
+      }),
+      complaintsCollection.countDocuments({ status: 'RESOLVED' })
+    ]);
+
+    const statusMap = byStatus.reduce((acc: any, item: any) => {
+      acc[item._id] = item.count;
+      return acc;
+    }, {
+      SUBMITTED: 0,
+      VERIFIED: 0,
+      ASSIGNED: 0,
+      IN_PROGRESS: 0,
+      RESOLVED: 0
     });
-    if (!res.ok) throw new Error('Failed to fetch stats');
-    return res.json();
+
+    const categoryMap = byCategory.reduce((acc: any, item: any) => {
+      acc[item._id] = item.count;
+      return acc;
+    }, {});
+
+    return {
+      total,
+      open: total - resolved,
+      resolved,
+      thisWeek,
+      byStatus: statusMap,
+      byCategory: categoryMap
+    };
   } catch (error) {
     console.error('Failed to fetch stats:', error);
     return null;
