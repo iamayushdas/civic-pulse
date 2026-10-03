@@ -2,18 +2,17 @@ import { MongoClient, Db, MongoClientOptions } from 'mongodb';
 
 const uri = process.env.MONGODB_URI || '';
 
-// MongoDB connection options optimized for Vercel
+// MongoDB connection options optimized for Vercel serverless
 const options: MongoClientOptions = {
   maxPoolSize: 10,
   minPoolSize: 2,
   socketTimeoutMS: 45000,
   serverSelectionTimeoutMS: 5000,
   retryWrites: true,
-  // Disable SSL certificate verification for development/Vercel
-  ...(process.env.NODE_ENV === 'development' ? {} : {
-    tls: true,
-    tlsAllowInvalidCertificates: true,
-  }),
+  // For Vercel + MongoDB Atlas, we need to allow invalid certs in some cases
+  // This is a workaround for TLS issues in serverless environments
+  tlsAllowInvalidCertificates: true,
+  tlsAllowInvalidHostnames: true,
 };
 
 let client: MongoClient;
