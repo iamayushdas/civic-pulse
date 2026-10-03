@@ -22,6 +22,16 @@ export const metadata: Metadata = {
   title: 'Delhi Civic — Report. Track. Fix.',
   description: 'A public civic platform for Delhi residents to report civic problems and track their resolution.',
   keywords: ['Delhi', 'Civic', 'Complaints', 'Municipal', 'Government', 'Issues'],
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
+      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16.png', type: 'image/png', sizes: '16x16' },
+    ],
+    apple: '/apple-touch-icon.png',
+    shortcut: '/favicon-16.png',
+  },
+  manifest: '/site.webmanifest',
 };
 
 export const viewport: Viewport = {
