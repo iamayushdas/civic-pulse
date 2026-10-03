@@ -1,7 +1,20 @@
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient, Db, MongoClientOptions } from 'mongodb';
 
 const uri = process.env.MONGODB_URI || '';
-const options = {};
+
+// MongoDB connection options optimized for Vercel
+const options: MongoClientOptions = {
+  maxPoolSize: 10,
+  minPoolSize: 2,
+  socketTimeoutMS: 45000,
+  serverSelectionTimeoutMS: 5000,
+  retryWrites: true,
+  // Disable SSL certificate verification for development/Vercel
+  ...(process.env.NODE_ENV === 'development' ? {} : {
+    tls: true,
+    tlsAllowInvalidCertificates: true,
+  }),
+};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient> | null = null;
