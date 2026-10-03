@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ArrowLeft, MapPin, Camera, User, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowLeft, MapPin, Camera, User, CheckCircle2, Loader2 } from 'lucide-react';
 import { Button } from '@/components/brutal/Button';
 import { Card, CardContent, CardHeader } from '@/components/brutal/Card';
 import { Input, Textarea } from '@/components/brutal/Input';
@@ -36,6 +36,28 @@ export default function ReportPage() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [pincodeLoading, setPincodeLoading] = useState(false);
+
+  const fetchPincodeDetails = async (pincode: string) => {
+    if (!/^\d{6}$/.test(pincode)) return;
+    
+    setPincodeLoading(true);
+    try {
+      const response = await fetch(`/api/pincode/${pincode}`);
+      if (response.ok) {
+        const data = await response.json();
+        setFormData(prev => ({
+          ...prev,
+          area: data.area || prev.area,
+          ward: data.ward || prev.ward,
+        }));
+      }
+    } catch (error) {
+      console.error('Failed to fetch pincode details:', error);
+    } finally {
+      setPincodeLoading(false);
+    }
+  };
 
   const validateStep = (step: number): boolean => {
     const newErrors: Record<string, string> = {};
@@ -255,9 +277,21 @@ export default function ReportPage() {
                   <Input
                     label="PINCODE"
                     value={formData.pincode}
-                    onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData({ ...formData, pincode: value });
+                      if (/^\d{6}$/.test(value)) {
+                        fetchPincodeDetails(value);
+                      }
+                    }}
+                    onBlur={(e) => {
+                      if (/^\d{6}$/.test(e.target.value)) {
+                        fetchPincodeDetails(e.target.value);
+                      }
+                    }}
                     placeholder="110001"
                     maxLength={6}
+                    suffix={pincodeLoading ? <Loader2 size={16} className="animate-spin" /> : undefined}
                   />
                 </div>
               </div>
