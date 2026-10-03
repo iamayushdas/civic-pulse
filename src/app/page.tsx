@@ -77,7 +77,7 @@ async function getRecentComplaints() {
       ...c,
       _id: c._id.toString(),
       createdAt: c.createdAt.toISOString(),
-      updatedAt: c.updatedAt.toISOString()
+      updatedAt: c.updatedAt?.toISOString() || c.createdAt.toISOString()
     }));
   } catch (error) {
     console.error('Failed to fetch recent complaints:', error);
@@ -641,7 +641,7 @@ export default async function HomePage() {
                 const color = colors[index % colors.length];
                 
                 return (
-                  <Link key={complaint.complaintId} href={`/complaints/${complaint.complaintId}`}>
+                  <Link key={`${complaint.complaintId}-${index}`} href={`/complaints/${complaint.complaintId}`}>
                     <div className="relative group cursor-pointer">
                       <div className="absolute inset-0 bg-black translate-x-3 translate-y-3"></div>
                       <div className={`relative ${color} border-4 border-black p-6 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform`}>
@@ -649,9 +649,11 @@ export default async function HomePage() {
                           <div className="font-mono font-black text-sm bg-black text-white px-2 py-1">
                             {complaint.complaintId}
                           </div>
-                          <Badge status={complaint.status}>
-                            <span className="text-xs font-bold">{complaint.status.replace('_', ' ')}</span>
-                          </Badge>
+                          {complaint.status && (
+                            <Badge status={complaint.status}>
+                              <span className="text-xs font-bold">{complaint.status.replace('_', ' ')}</span>
+                            </Badge>
+                          )}
                         </div>
                         
                         <div className="font-black text-lg mb-2 line-clamp-1 uppercase">

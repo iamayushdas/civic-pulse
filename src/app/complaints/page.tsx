@@ -154,8 +154,8 @@ export default function ComplaintsPage() {
         </Card>
       ) : (
         <div className="space-y-4">
-          {complaints.map((complaint) => (
-            <Link key={complaint.complaintId} href={`/complaints/${complaint.complaintId}`}>
+          {complaints.map((complaint, index) => (
+            <Link key={`${complaint.complaintId}-${index}`} href={`/complaints/${complaint.complaintId}`}>
               <Card className="hover:translate-x-1 hover:translate-y-1 hover:shadow-brutal-sm transition-all cursor-pointer">
                 <CardContent>
                   <div className="flex flex-col lg:flex-row gap-4">
@@ -164,9 +164,11 @@ export default function ComplaintsPage() {
                         <div className="font-mono font-bold text-lg">
                           {complaint.complaintId}
                         </div>
-                        <Badge status={complaint.status}>
-                          {complaint.status.replace('_', ' ')}
-                        </Badge>
+                        {complaint.status && (
+                          <Badge status={complaint.status}>
+                            {complaint.status.replace('_', ' ')}
+                          </Badge>
+                        )}
                         <div className="label-mono">
                           {formatRelativeTime(complaint.createdAt)}
                         </div>

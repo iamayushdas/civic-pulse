@@ -29,12 +29,15 @@ export default function AreaPage() {
     'Chandni Chowk',
   ];
 
-  const searchArea = async (area: string) => {
-    setSelectedArea(area);
+  const searchArea = async (query: string) => {
+    setSelectedArea(query);
     setLoading(true);
 
+    const isPincode = /^\d{6}$/.test(query.trim());
+    const searchParam = isPincode ? `pincode=${encodeURIComponent(query.trim())}` : `area=${encodeURIComponent(query.trim())}`;
+
     try {
-      const response = await fetch(`/api/complaints?area=${encodeURIComponent(area)}&limit=20`);
+      const response = await fetch(`/api/complaints?${searchParam}&limit=20`);
       const data = await response.json();
       setComplaints(data.complaints || []);
 
@@ -56,7 +59,7 @@ export default function AreaPage() {
       );
 
       setAreaData({
-        name: area,
+        name: query,
         ...stats,
         topCategory,
         categoryCount,
