@@ -18,6 +18,7 @@ export default function AreaPage() {
   const [loading, setLoading] = useState(false);
 
   const popularAreas = [
+    'Sangam Vihar',
     'Connaught Place',
     'Saket',
     'Dwarka',
