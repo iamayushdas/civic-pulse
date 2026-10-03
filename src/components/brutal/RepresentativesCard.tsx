@@ -18,19 +18,30 @@ export default function RepresentativesCard({ pincode, category }: Representativ
     if (!pincode || !category) return;
 
     let active = true;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 10000);
 
-    fetch(`/api/representatives/${pincode}?category=${encodeURIComponent(category)}`)
+    fetch(`/api/representatives/${pincode}?category=${encodeURIComponent(category)}`, {
+      signal: controller.signal,
+    })
       .then((response) => (response.ok ? response.json() : null))
       .then((data) => {
         if (active) setRepresentatives(data?.representatives || []);
       })
-      .catch((error) => console.error('Failed to fetch representatives:', error))
+      .catch((error) => {
+        if (error.name !== 'AbortError') {
+          console.error('Failed to fetch representatives:', error);
+        }
+      })
       .finally(() => {
+        window.clearTimeout(timeout);
         if (active) setLoading(false);
       });
 
     return () => {
       active = false;
+      window.clearTimeout(timeout);
+      controller.abort();
     };
   }, [pincode, category]);
 
