@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AuthProvider } from '@/components/brutal/AuthProvider';
+import { PwaRegister } from '@/components/pwa/PwaRegister';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -19,6 +20,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  applicationName: 'Delhi Civic',
   title: 'Delhi Civic — Report. Track. Fix.',
   description: 'A public civic platform for Delhi residents to report civic problems and track their resolution.',
   keywords: ['Delhi', 'Civic', 'Complaints', 'Municipal', 'Government', 'Issues'],
@@ -32,6 +34,18 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16.png',
   },
   manifest: '/site.webmanifest',
+  themeColor: '#dc2626',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Delhi Civic',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
+    'msapplication-TileColor': '#dc2626',
+  },
 };
 
 export const viewport: Viewport = {
@@ -39,6 +53,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
+  themeColor: '#dc2626',
 };
 
 export default function RootLayout({
@@ -49,6 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${spaceMono.variable}`}>
       <body className="flex flex-col min-h-screen overflow-x-hidden">
+        <PwaRegister />
         <AuthProvider>
           <Header />
           <main className="flex-1 overflow-x-hidden">

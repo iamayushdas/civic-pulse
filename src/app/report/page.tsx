@@ -137,27 +137,21 @@ export default function ReportPage() {
 
   if (submittedId) {
     return (
-      <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_#fef9c3_0%,_#f3f4f6_35%,_#dbeafe_100%)] px-4 py-12 sm:py-20">
-        <div className="absolute -left-8 top-12 h-24 w-24 rotate-12 border-4 border-black bg-yellow-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" />
-        <div className="absolute right-6 top-20 h-20 w-20 border-4 border-black bg-red-500 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" />
-
-        <div className="relative mx-auto max-w-2xl">
-          <div className="card-brutal relative border-4 border-black bg-white p-8 text-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] sm:p-12">
-            <div className="absolute -right-3 -top-3 h-8 w-8 border-4 border-black bg-lime-400" />
-            <div className="text-center">
-              <div className="mb-6 inline-flex items-center justify-center rounded-none border-4 border-black bg-lime-400 p-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-                <CheckCircle2 size={54} className="text-black" />
-              </div>
-              <h1 className="mb-4 text-3xl font-black uppercase tracking-[-0.08em] sm:text-5xl">
+      <div className="container mx-auto px-4 py-12 sm:py-20">
+        <div className="max-w-2xl mx-auto">
+          <Card variant="accent" className="text-civic-white">
+            <CardContent className="py-12 text-center">
+              <CheckCircle2 size={64} className="mx-auto mb-6" />
+              <h1 className="text-3xl sm:text-4xl font-bold mb-4">
                 COMPLAINT REGISTERED
               </h1>
-              <div className="mb-6 border-4 border-black bg-black px-4 py-3 text-4xl font-black tracking-[0.12em] text-yellow-300 sm:text-6xl">
+              <div className="text-5xl sm:text-6xl font-bold font-mono mb-6">
                 {submittedId}
               </div>
-              <p className="mb-8 text-lg font-bold uppercase tracking-wide text-black/70">
+              <p className="text-lg mb-8">
                 Save this ID to track your complaint.
               </p>
-              <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   variant="white"
                   size="lg"
@@ -170,329 +164,312 @@ export default function ReportPage() {
                   variant="ghost"
                   size="lg"
                   onClick={() => router.push('/')}
-                  className="!border-black !text-black hover:!bg-black hover:!text-white"
+                  className="!text-white !border-white hover:!bg-white hover:!text-civic-accent"
                 >
                   GO HOME
                 </Button>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_#fef9c3_0%,_#f3f4f6_35%,_#dbeafe_100%)] px-4 py-8 sm:py-12">
-      <div className="absolute -left-8 top-10 h-28 w-28 rotate-12 border-4 border-black bg-yellow-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" />
-      <div className="absolute right-8 top-16 h-20 w-20 border-4 border-black bg-red-500 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" />
-      <div className="absolute bottom-6 left-10 h-24 w-24 border-4 border-black bg-lime-400 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]" />
-
-      <div className="relative mx-auto max-w-6xl">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 border-4 border-black bg-black px-3 py-2 text-xs font-black uppercase tracking-[0.2em] text-yellow-300 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
-              REPORT ISSUE
-            </div>
-            <h1 className="text-4xl font-black uppercase leading-none tracking-[-0.08em] text-black sm:text-5xl">
-              SPEAK UP.
-            </h1>
+    <div className="container mx-auto px-4 py-8 sm:py-12">
+      <div className="max-w-3xl mx-auto">
+        {/* Progress */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            {STEPS.map((step, index) => (
+              <div
+                key={step}
+                className={`flex items-center ${index < STEPS.length - 1 ? 'flex-1' : ''}`}
+              >
+                <div
+                  className={`w-10 h-10 border-2 flex items-center justify-center font-bold text-sm ${
+                    index <= currentStep
+                      ? 'bg-civic-accent text-civic-white border-civic-accent'
+                      : 'bg-civic-white text-civic-black border-civic-black'
+                  }`}
+                >
+                  {index + 1}
+                </div>
+                {index < STEPS.length - 1 && (
+                  <div
+                    className={`flex-1 h-0.5 mx-2 ${
+                      index < currentStep ? 'bg-civic-accent' : 'bg-civic-black'
+                    }`}
+                  />
+                )}
+              </div>
+            ))}
           </div>
-          <div className="inline-flex items-center gap-2 border-4 border-black bg-pink-400 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
-            CITY FIXED ONE REPORT AT A TIME
+          <div className="label-mono text-center">
+            STEP {currentStep + 1} / {STEPS.length} — {STEPS[currentStep]}
           </div>
         </div>
 
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-8">
-            <div className="mb-4 flex items-center justify-between">
-              {STEPS.map((step, index) => (
-                <div
-                  key={step}
-                  className={`flex items-center ${index < STEPS.length - 1 ? 'flex-1' : ''}`}
-                >
-                  <div
-                    className={`flex h-10 w-10 items-center justify-center border-2 text-sm font-bold ${
-                      index <= currentStep
-                        ? 'border-civic-accent bg-civic-accent text-civic-white'
-                        : 'border-civic-black bg-civic-white text-civic-black'
+        <Card>
+          <CardHeader>
+            <h1 className="text-2xl sm:text-3xl font-bold">
+              {currentStep === 0 && "WHAT'S WRONG?"}
+              {currentStep === 1 && 'WHERE?'}
+              {currentStep === 2 && 'DETAILS'}
+              {currentStep === 3 && 'CONTACT'}
+              {currentStep === 4 && 'REVIEW'}
+            </h1>
+          </CardHeader>
+
+          <CardContent className="space-y-6">
+            {/* Step 0: Category */}
+            {currentStep === 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {COMPLAINT_CATEGORIES.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setFormData({ ...formData, category })}
+                    className={`p-6 border-2 font-bold text-left transition-all ${
+                      formData.category === category
+                        ? 'bg-civic-accent text-civic-white border-civic-accent shadow-brutal'
+                        : 'bg-civic-white text-civic-black border-civic-black hover:shadow-brutal-sm'
                     }`}
                   >
-                    {index + 1}
-                  </div>
-                  {index < STEPS.length - 1 && (
-                    <div
-                      className={`mx-2 h-0.5 flex-1 ${
-                        index < currentStep ? 'bg-civic-accent' : 'bg-civic-black'
-                      }`}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="label-mono text-center">
-              STEP {currentStep + 1} / {STEPS.length} — {STEPS[currentStep]}
-            </div>
-          </div>
-
-          <div className="card-brutal relative bg-white p-1 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]">
-            <Card className="overflow-hidden">
-              <CardHeader className="border-b-4 border-black bg-yellow-300">
-                <h1 className="text-2xl font-black uppercase tracking-[-0.06em] text-black sm:text-3xl">
-                  {currentStep === 0 && "WHAT'S WRONG?"}
-                  {currentStep === 1 && 'WHERE?'}
-                  {currentStep === 2 && 'DETAILS'}
-                  {currentStep === 3 && 'CONTACT'}
-                  {currentStep === 4 && 'REVIEW'}
-                </h1>
-              </CardHeader>
-
-              <CardContent className="space-y-6">
-                {/* Step 0: Category */}
-                {currentStep === 0 && (
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    {COMPLAINT_CATEGORIES.map((category) => (
-                      <button
-                        key={category}
-                        onClick={() => setFormData({ ...formData, category })}
-                        className={`border-2 p-6 text-left font-bold transition-all ${
-                          formData.category === category
-                            ? 'border-civic-accent bg-civic-accent text-civic-white shadow-brutal'
-                            : 'border-civic-black bg-civic-white text-civic-black hover:shadow-brutal-sm'
-                        }`}
-                      >
-                        {CATEGORY_LABELS[category].toUpperCase()}
-                      </button>
-                    ))}
-                    {errors.category && (
-                      <p className="col-span-full text-sm font-medium text-civic-accent">
-                        {errors.category}
-                      </p>
-                    )}
-                  </div>
+                    {CATEGORY_LABELS[category].toUpperCase()}
+                  </button>
+                ))}
+                {errors.category && (
+                  <p className="text-civic-accent font-medium text-sm col-span-full">
+                    {errors.category}
+                  </p>
                 )}
+              </div>
+            )}
 
-                {/* Step 1: Location */}
-                {currentStep === 1 && (
-                  <div className="space-y-6">
-                    <Suspense fallback={
-                      <div className="flex h-64 w-full items-center justify-center border-2 border-civic-black bg-civic-bg">
-                        <div className="text-center">
-                          <div className="mb-4 inline-block h-12 w-12 animate-spin rounded-full border-4 border-civic-black border-t-civic-accent" />
-                          <p className="text-sm font-bold uppercase">Loading Map...</p>
-                        </div>
-                      </div>
-                    }>
-                      <LocationPicker
-                        location={formData.location}
-                        onLocationChange={(location) => {
-                          setFormData({ ...formData, location });
-                        }}
-                      />
-                    </Suspense>
-
-                    <Input
-                      label="AREA / LOCALITY *"
-                      value={formData.area}
-                      onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                      placeholder="e.g., Connaught Place"
-                      error={errors.area}
-                    />
-
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <Input
-                        label="WARD"
-                        value={formData.ward}
-                        onChange={(e) => setFormData({ ...formData, ward: e.target.value })}
-                        placeholder="Optional"
-                      />
-                      <Input
-                        label="PINCODE"
-                        value={formData.pincode}
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          setFormData({ ...formData, pincode: value });
-                          if (/^\d{6}$/.test(value)) {
-                            fetchPincodeDetails(value);
-                          }
-                        }}
-                        onBlur={(e) => {
-                          if (/^\d{6}$/.test(e.target.value)) {
-                            fetchPincodeDetails(e.target.value);
-                          }
-                        }}
-                        placeholder="110001"
-                        maxLength={6}
-                        suffix={pincodeLoading ? <Loader2 size={16} className="animate-spin" /> : undefined}
-                      />
+            {/* Step 1: Location */}
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <Suspense fallback={
+                  <div className="w-full h-64 flex items-center justify-center bg-civic-bg border-2 border-civic-black">
+                    <div className="text-center">
+                      <div className="inline-block w-12 h-12 border-4 border-civic-black border-t-civic-accent rounded-full animate-spin mb-4"></div>
+                      <p className="font-bold uppercase text-sm">Loading Map...</p>
                     </div>
                   </div>
-                )}
-
-                {/* Step 2: Details */}
-                {currentStep === 2 && (
-                  <div className="space-y-6">
-                    <Input
-                      label="TITLE *"
-                      value={formData.title}
-                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                      placeholder="Brief description of the problem"
-                      error={errors.title}
-                    />
-
-                    <Textarea
-                      label="DESCRIPTION *"
-                      value={formData.description}
-                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      placeholder="Provide detailed information about the issue..."
-                      error={errors.description}
-                      rows={6}
-                    />
-
-                    <div>
-                      <label className="mb-2 block label-mono">PHOTOS (OPTIONAL)</label>
-                      <div className="border-2 border-dashed border-civic-black bg-civic-bg p-8 text-center">
-                        <Camera size={48} className="mx-auto mb-4 text-civic-muted" />
-                        <p className="mb-2 font-medium text-civic-muted">Photo upload placeholder</p>
-                        <p className="text-sm text-civic-muted">Up to 5 images</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 3: Contact */}
-                {currentStep === 3 && (
-                  <div className="space-y-6">
-                    <div className="border-2 border-civic-black bg-civic-bg p-6">
-                      <label className="flex cursor-pointer items-center gap-3">
-                        <input
-                          type="checkbox"
-                          checked={formData.anonymous}
-                          onChange={(e) => setFormData({ ...formData, anonymous: e.target.checked })}
-                          className="h-6 w-6 border-2 border-civic-black"
-                        />
-                        <span className="font-bold">SUBMIT ANONYMOUSLY</span>
-                      </label>
-                      <p className="ml-9 mt-2 text-sm text-civic-muted">
-                        You won't receive updates, but your complaint will still be processed.
-                      </p>
-                    </div>
-
-                    {!formData.anonymous && (
-                      <>
-                        <Input
-                          label="YOUR NAME *"
-                          value={formData.citizenName}
-                          onChange={(e) => setFormData({ ...formData, citizenName: e.target.value })}
-                          placeholder="Full name"
-                          error={errors.citizenName}
-                        />
-
-                        <Input
-                          label="PHONE NUMBER"
-                          value={formData.citizenPhone}
-                          onChange={(e) => setFormData({ ...formData, citizenPhone: e.target.value })}
-                          placeholder="10-digit mobile number"
-                          maxLength={10}
-                          error={errors.citizenPhone}
-                        />
-
-                        <Input
-                          label="EMAIL ADDRESS"
-                          type="email"
-                          value={formData.citizenEmail}
-                          onChange={(e) => setFormData({ ...formData, citizenEmail: e.target.value })}
-                          placeholder="your.email@example.com"
-                          error={errors.citizenEmail}
-                        />
-                      </>
-                    )}
-                  </div>
-                )}
-
-                {/* Step 4: Review */}
-                {currentStep === 4 && (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                      <div>
-                        <div className="label-mono mb-2">CATEGORY</div>
-                        <div className="font-bold">
-                          {formData.category && CATEGORY_LABELS[formData.category]}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="label-mono mb-2">LOCATION</div>
-                        <div className="font-bold">{formData.area}</div>
-                        {formData.pincode && (
-                          <div className="text-sm text-civic-muted">{formData.pincode}</div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="border-t-2 border-civic-black pt-6">
-                      <div className="label-mono mb-2">TITLE</div>
-                      <div className="font-bold">{formData.title}</div>
-                    </div>
-
-                    <div className="border-t-2 border-civic-black pt-6">
-                      <div className="label-mono mb-2">DESCRIPTION</div>
-                      <div className="leading-relaxed">{formData.description}</div>
-                    </div>
-
-                    {!formData.anonymous && formData.citizenName && (
-                      <div className="border-t-2 border-civic-black pt-6">
-                        <div className="label-mono mb-2">CONTACT</div>
-                        <div className="font-bold">{formData.citizenName}</div>
-                        {formData.citizenPhone && (
-                          <div className="text-sm">{formData.citizenPhone}</div>
-                        )}
-                        {formData.citizenEmail && (
-                          <div className="text-sm">{formData.citizenEmail}</div>
-                        )}
-                      </div>
-                    )}
-
-                    {formData.anonymous && (
-                      <div className="border-2 border-civic-black bg-civic-bg p-4">
-                        <p className="text-sm font-medium">
-                          ⚠ This complaint will be submitted anonymously
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </CardContent>
-
-              <div className="flex justify-between gap-4 border-t-4 border-black bg-white p-4 sm:p-6">
-                {currentStep > 0 && (
-                  <Button variant="ghost" onClick={handleBack} disabled={isSubmitting}>
-                    <ArrowLeft size={20} />
-                    BACK
-                  </Button>
-                )}
-
-                <div className="ml-auto">
-                  {currentStep < STEPS.length - 1 ? (
-                    <Button variant="primary" onClick={handleNext}>
-                      NEXT
-                      <ArrowRight size={20} />
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      onClick={handleSubmit}
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? 'SUBMITTING...' : 'SUBMIT COMPLAINT'}
-                      <ArrowRight size={20} />
-                    </Button>
-                  )}
+                }>
+                  <LocationPicker
+                    location={formData.location}
+                    onLocationChange={(location) => {
+                      setFormData({ ...formData, location });
+                    }}
+                  />
+                </Suspense>
+                
+                <Input
+                  label="AREA / LOCALITY *"
+                  value={formData.area}
+                  onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+                  placeholder="e.g., Connaught Place"
+                  error={errors.area}
+                />
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Input
+                    label="WARD"
+                    value={formData.ward}
+                    onChange={(e) => setFormData({ ...formData, ward: e.target.value })}
+                    placeholder="Optional"
+                  />
+                  <Input
+                    label="PINCODE"
+                    value={formData.pincode}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData({ ...formData, pincode: value });
+                      if (/^\d{6}$/.test(value)) {
+                        fetchPincodeDetails(value);
+                      }
+                    }}
+                    onBlur={(e) => {
+                      if (/^\d{6}$/.test(e.target.value)) {
+                        fetchPincodeDetails(e.target.value);
+                      }
+                    }}
+                    placeholder="110001"
+                    maxLength={6}
+                    suffix={pincodeLoading ? <Loader2 size={16} className="animate-spin" /> : undefined}
+                  />
                 </div>
               </div>
-            </Card>
+            )}
+
+            {/* Step 2: Details */}
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <Input
+                  label="TITLE *"
+                  value={formData.title}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  placeholder="Brief description of the problem"
+                  error={errors.title}
+                />
+                
+                <Textarea
+                  label="DESCRIPTION *"
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  placeholder="Provide detailed information about the issue..."
+                  error={errors.description}
+                  rows={6}
+                />
+
+                <div>
+                  <label className="block label-mono mb-2">PHOTOS (OPTIONAL)</label>
+                  <div className="border-2 border-dashed border-civic-black p-8 text-center bg-civic-bg">
+                    <Camera size={48} className="mx-auto mb-4 text-civic-muted" />
+                    <p className="text-civic-muted font-medium mb-2">
+                      Photo upload placeholder
+                    </p>
+                    <p className="text-sm text-civic-muted">
+                      Up to 5 images
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 3: Contact */}
+            {currentStep === 3 && (
+              <div className="space-y-6">
+                <div className="bg-civic-bg border-2 border-civic-black p-6">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formData.anonymous}
+                      onChange={(e) => setFormData({ ...formData, anonymous: e.target.checked })}
+                      className="w-6 h-6 border-2 border-civic-black"
+                    />
+                    <span className="font-bold">SUBMIT ANONYMOUSLY</span>
+                  </label>
+                  <p className="text-sm text-civic-muted mt-2 ml-9">
+                    You won't receive updates, but your complaint will still be processed.
+                  </p>
+                </div>
+
+                {!formData.anonymous && (
+                  <>
+                    <Input
+                      label="YOUR NAME *"
+                      value={formData.citizenName}
+                      onChange={(e) => setFormData({ ...formData, citizenName: e.target.value })}
+                      placeholder="Full name"
+                      error={errors.citizenName}
+                    />
+                    
+                    <Input
+                      label="PHONE NUMBER"
+                      value={formData.citizenPhone}
+                      onChange={(e) => setFormData({ ...formData, citizenPhone: e.target.value })}
+                      placeholder="10-digit mobile number"
+                      maxLength={10}
+                      error={errors.citizenPhone}
+                    />
+                    
+                    <Input
+                      label="EMAIL ADDRESS"
+                      type="email"
+                      value={formData.citizenEmail}
+                      onChange={(e) => setFormData({ ...formData, citizenEmail: e.target.value })}
+                      placeholder="your.email@example.com"
+                      error={errors.citizenEmail}
+                    />
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Step 4: Review */}
+            {currentStep === 4 && (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <div className="label-mono mb-2">CATEGORY</div>
+                    <div className="font-bold">
+                      {formData.category && CATEGORY_LABELS[formData.category]}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="label-mono mb-2">LOCATION</div>
+                    <div className="font-bold">{formData.area}</div>
+                    {formData.pincode && (
+                      <div className="text-sm text-civic-muted">{formData.pincode}</div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="border-t-2 border-civic-black pt-6">
+                  <div className="label-mono mb-2">TITLE</div>
+                  <div className="font-bold">{formData.title}</div>
+                </div>
+
+                <div className="border-t-2 border-civic-black pt-6">
+                  <div className="label-mono mb-2">DESCRIPTION</div>
+                  <div className="leading-relaxed">{formData.description}</div>
+                </div>
+
+                {!formData.anonymous && formData.citizenName && (
+                  <div className="border-t-2 border-civic-black pt-6">
+                    <div className="label-mono mb-2">CONTACT</div>
+                    <div className="font-bold">{formData.citizenName}</div>
+                    {formData.citizenPhone && (
+                      <div className="text-sm">{formData.citizenPhone}</div>
+                    )}
+                    {formData.citizenEmail && (
+                      <div className="text-sm">{formData.citizenEmail}</div>
+                    )}
+                  </div>
+                )}
+
+                {formData.anonymous && (
+                  <div className="bg-civic-bg border-2 border-civic-black p-4">
+                    <p className="text-sm font-medium">
+                      ⚠ This complaint will be submitted anonymously
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </CardContent>
+
+          <div className="flex justify-between gap-4 p-4 sm:p-6 border-t-2 border-civic-black">
+            {currentStep > 0 && (
+              <Button variant="ghost" onClick={handleBack} disabled={isSubmitting}>
+                <ArrowLeft size={20} />
+                BACK
+              </Button>
+            )}
+            
+            <div className="ml-auto">
+              {currentStep < STEPS.length - 1 ? (
+                <Button variant="primary" onClick={handleNext}>
+                  NEXT
+                  <ArrowRight size={20} />
+                </Button>
+              ) : (
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'SUBMITTING...' : 'SUBMIT COMPLAINT'}
+                  <ArrowRight size={20} />
+                </Button>
+              )}
+            </div>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );
