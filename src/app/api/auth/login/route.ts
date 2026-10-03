@@ -20,6 +20,23 @@ export async function POST(request: NextRequest) {
 
     const { email, password } = validationResult.data;
 
+    // Validate environment variables
+    if (!process.env.MONGODB_URI) {
+      console.error('MONGODB_URI is not set');
+      return NextResponse.json(
+        { error: 'Database configuration error' },
+        { status: 500 }
+      );
+    }
+
+    if (!process.env.JWT_SECRET) {
+      console.error('JWT_SECRET is not set');
+      return NextResponse.json(
+        { error: 'Authentication configuration error' },
+        { status: 500 }
+      );
+    }
+
     // Connect to database
     const db = await getDb();
     const usersCollection = db.collection<User>('users');
@@ -45,7 +62,7 @@ export async function POST(request: NextRequest) {
     // Generate JWT token
     const token = jwt.sign(
       { userId: user.userId, email: user.email, role: user.role },
-      process.env.JWT_SECRET!,
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -62,7 +79,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', details: (error as Error).message },
       { status: 500 }
     );
   }
