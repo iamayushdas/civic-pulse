@@ -8,6 +8,8 @@ import { CATEGORY_LABELS, Complaint, ComplaintCategory } from '@/types';
 import { formatDate, formatRelativeTime } from '@/lib/utils';
 import ComplaintLocationMap from '@/components/map/ComplaintLocationMapClient';
 import RepresentativesCard from '@/components/brutal/RepresentativesCard';
+import ComplaintEngagement from '@/components/brutal/ComplaintEngagement';
+import SlaCountdown from '@/components/brutal/SlaCountdown';
 import { getDb } from '@/lib/mongodb';
 
 async function getComplaint(id: string): Promise<Complaint | null> {
@@ -70,6 +72,8 @@ export default async function ComplaintDetailPage({
         </div>
       </div>
 
+      <SlaCountdown dueAt={complaint.slaDueAt} status={complaint.status} />
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
@@ -102,7 +106,7 @@ export default async function ComplaintDetailPage({
                         key={idx}
                         className="aspect-video bg-civic-bg border-2 border-civic-black"
                       >
-                        {/* Image placeholder */}
+                        <img src={img} alt={`Complaint evidence ${idx + 1}`} className="h-full w-full object-cover" />
                       </div>
                     ))}
                   </div>
@@ -121,7 +125,7 @@ export default async function ComplaintDetailPage({
                 {['SUBMITTED', 'VERIFIED', 'ASSIGNED', 'IN_PROGRESS', 'RESOLVED'].map(
                   (status, index) => {
                     const historyEntry = complaint.statusHistory.find(
-                      (h) => h.status === status
+                      (h) => h.status === status && h.isPublic !== false
                     );
                     const isActive = status === complaint.status;
                     const isPast = index <= statusIndex;
@@ -183,6 +187,16 @@ export default async function ComplaintDetailPage({
                 <div className="mt-6 pt-6 border-t-2 border-civic-black">
                   <div className="label-mono mb-2">RESOLUTION</div>
                   <div className="leading-relaxed">{complaint.resolutionNote}</div>
+                </div>
+              )}
+              {complaint.status === 'RESOLVED' && complaint.resolutionImages && complaint.resolutionImages.length > 0 && (
+                <div className="mt-6 border-t-2 border-civic-black pt-6">
+                  <div className="label-mono mb-4">RESOLUTION PROOF</div>
+                  <div className="grid grid-cols-2 gap-4">
+                    {complaint.resolutionImages.map((image, index) => (
+                      <img key={index} src={image} alt={`Resolution proof ${index + 1}`} className="aspect-video w-full border-2 border-civic-black object-cover" />
+                    ))}
+                  </div>
                 </div>
               )}
             </CardContent>
@@ -248,13 +262,15 @@ export default async function ComplaintDetailPage({
             </CardContent>
           </Card>
 
-          {/* Reopen */}
-          {complaint.status === 'RESOLVED' && (
-            <Button variant="ghost" block>
-              REOPEN COMPLAINT
-            </Button>
-          )}
         </div>
+      </div>
+
+      <div className="mt-6">
+        <ComplaintEngagement
+          complaintId={complaint.complaintId}
+          status={complaint.status}
+          confirmationCount={complaint.confirmationCount}
+        />
       </div>
     </div>
   );

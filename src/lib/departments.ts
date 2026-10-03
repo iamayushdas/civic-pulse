@@ -1,0 +1,15 @@
+export const DEPARTMENT_OPTIONS = [
+  'Water Department',
+  'Delhi Jal Board (DJB)',
+  'PWD',
+  'Municipal Corporation of Delhi (MCD)',
+  'MCD',
+  'Sanitation Department',
+  'Sewerage Department',
+  'Streetlight Department',
+  'Parks Department',
+  'Delhi Pollution Control Committee',
+  'Animal Husbandry Department',
+  'Transport Department',
+  'Other',
+] as const;

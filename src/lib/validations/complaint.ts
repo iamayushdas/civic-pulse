@@ -53,16 +53,26 @@ export const updateComplaintStatusSchema = z.object({
   priority: z.enum(['LOW', 'MEDIUM', 'HIGH', 'URGENT']).optional(),
   resolutionNote: z.string().max(1000).optional(),
   resolutionImages: z.array(z.string()).max(5).optional(),
+  duplicateOf: z.string().optional(),
+});
+
+export const complaintCommentSchema = z.object({
+  authorName: z.string().min(2).max(100),
+  authorEmail: z.string().email().optional(),
+  body: z.string().min(2).max(1000),
 });
 
 export const complaintQuerySchema = z.object({
+  q: z.string().optional(),
   category: z.string().optional(),
   status: z.string().optional(),
   area: z.string().optional(),
   ward: z.string().optional(),
   pincode: z.string().optional(),
   department: z.string().optional(),
+  assignedTo: z.string().optional(),
   priority: z.string().optional(),
+  overdue: z.enum(['true', 'false']).optional(),
   fromDate: z.string().optional(),
   toDate: z.string().optional(),
   page: z.string().optional(),

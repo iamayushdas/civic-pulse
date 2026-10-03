@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Filter, ArrowRight } from 'lucide-react';
+import { Search, Filter, ArrowRight, Download, FileText } from 'lucide-react';
 import { Card, CardContent } from '@/components/brutal/Card';
 import { Button } from '@/components/brutal/Button';
 import { Badge } from '@/components/brutal/Badge';
@@ -10,6 +10,7 @@ import { Input } from '@/components/brutal/Input';
 import { Select } from '@/components/brutal/Select';
 import { CATEGORY_LABELS, STATUS_LABELS, ComplaintCategory, ComplaintStatus, Complaint } from '@/types';
 import { formatRelativeTime } from '@/lib/utils';
+import { useTranslation } from '@/lib/i18n';
 
 export default function ComplaintsPage() {
   const [complaints, setComplaints] = useState<Complaint[]>([]);
@@ -19,7 +20,9 @@ export default function ComplaintsPage() {
     category: '',
     status: '',
     area: '',
+    q: '',
   });
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchComplaints();
@@ -32,6 +35,7 @@ export default function ComplaintsPage() {
       if (filters.category) params.append('category', filters.category);
       if (filters.status) params.append('status', filters.status);
       if (filters.area) params.append('area', filters.area);
+      if (filters.q) params.append('q', filters.q);
       params.append('limit', '20');
 
       const response = await fetch(`/api/complaints?${params}`);
@@ -45,19 +49,44 @@ export default function ComplaintsPage() {
   };
 
   const handleSearch = () => {
-    if (searchId.trim()) {
-      window.location.href = `/complaints/${searchId.trim().toUpperCase()}`;
-    }
+    setFilters((current) => ({ ...current, q: searchId.trim() }));
+  };
+
+  const exportComplaints = async () => {
+    const params = new URLSearchParams({ limit: '500' });
+    Object.entries(filters).forEach(([key, value]) => value && params.set(key, value));
+    const response = await fetch(`/api/complaints?${params}`);
+    const data = await response.json();
+    const rows: string[][] = (data.complaints || []).map((complaint: Complaint) => [
+      complaint.complaintId,
+      complaint.title,
+      complaint.category,
+      complaint.status,
+      complaint.priority,
+      complaint.area,
+      complaint.pincode || '',
+      complaint.department || '',
+      String(complaint.createdAt),
+    ]);
+    const csv = [['Complaint ID', 'Title', 'Category', 'Status', 'Priority', 'Area', 'Pincode', 'Department', 'Created'], ...rows]
+      .map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(','))
+      .join('\n');
+    const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'delhi-civic-complaints.csv';
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
     <div className="container mx-auto px-4 py-8 sm:py-12">
       <div className="mb-8 sm:mb-12">
         <h1 className="text-3xl sm:text-5xl font-bold mb-4">
-          TRACK COMPLAINTS
+          {t('trackComplaint')}
         </h1>
         <p className="text-lg text-civic-muted">
-          Search for your complaint ID or browse all reported issues
+          {t('searchPlaceholder')}
         </p>
       </div>
 
@@ -67,7 +96,7 @@ export default function ComplaintsPage() {
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <Input
-                placeholder="Enter complaint ID (e.g., DL-20491)"
+                placeholder={t('searchPlaceholder')}
                 value={searchId}
                 onChange={(e) => setSearchId(e.target.value.toUpperCase())}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
@@ -75,7 +104,15 @@ export default function ComplaintsPage() {
             </div>
             <Button variant="primary" onClick={handleSearch}>
               <Search size={20} />
-              SEARCH
+              {t('search')}
+            </Button>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Button variant="ghost" size="sm" onClick={exportComplaints}>
+              <Download size={16} /> {t('exportCsv')}
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => window.print()}>
+              <FileText size={16} /> {t('printPdf')}
             </Button>
           </div>
         </CardContent>
@@ -91,7 +128,7 @@ export default function ComplaintsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Select
               options={[
-                { value: '', label: 'All Categories' },
+                { value: '', label: t('allCategories') },
                 ...(Object.keys(CATEGORY_LABELS) as ComplaintCategory[]).map((cat) => ({
                   value: cat,
                   label: CATEGORY_LABELS[cat],
@@ -102,7 +139,7 @@ export default function ComplaintsPage() {
             />
             <Select
               options={[
-                { value: '', label: 'All Statuses' },
+                { value: '', label: t('allStatuses') },
                 ...(Object.keys(STATUS_LABELS) as ComplaintStatus[]).map((status) => ({
                   value: status,
                   label: STATUS_LABELS[status],
@@ -112,7 +149,7 @@ export default function ComplaintsPage() {
               onChange={(e) => setFilters({ ...filters, status: e.target.value })}
             />
             <Input
-              placeholder="Area / Locality"
+              placeholder={t('areaLocality')}
               value={filters.area}
               onChange={(e) => setFilters({ ...filters, area: e.target.value })}
             />
@@ -121,10 +158,13 @@ export default function ComplaintsPage() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setFilters({ category: '', status: '', area: '' })}
+              onClick={() => {
+                setSearchId('');
+                setFilters({ category: '', status: '', area: '', q: '' });
+              }}
               className="mt-4"
             >
-              CLEAR FILTERS
+              {t('clearFilters')}
             </Button>
           )}
         </CardContent>
@@ -133,20 +173,20 @@ export default function ComplaintsPage() {
       {/* Results */}
       {loading ? (
         <div className="text-center py-12">
-          <div className="text-xl font-bold text-civic-muted">LOADING...</div>
+          <div className="text-xl font-bold text-civic-muted">{t('loading')}</div>
         </div>
       ) : complaints.length === 0 ? (
         <Card>
           <CardContent className="text-center py-12">
             <div className="text-xl font-bold text-civic-muted mb-4">
-              NO COMPLAINTS FOUND
+              {t('noComplaintsFound')}
             </div>
             <p className="text-civic-muted mb-6">
-              Try adjusting your filters or search with a different ID
+              {t('searchPlaceholder')}
             </p>
             <Link href="/report">
               <Button variant="primary">
-                REPORT NEW ISSUE
+                {t('reportNewIssue')}
                 <ArrowRight size={20} />
               </Button>
             </Link>

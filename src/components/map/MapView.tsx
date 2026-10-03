@@ -41,6 +41,16 @@ function createCustomIcon(color: string): L.DivIcon {
   });
 }
 
+function createClusterIcon(count: number): L.DivIcon {
+  const color = count >= 10 ? '#e03a3e' : count >= 5 ? '#f59e0b' : '#111111';
+  return L.divIcon({
+    className: 'complaint-cluster',
+    html: `<div style="background:${color};color:#fff;width:42px;height:42px;border:4px solid #111;box-shadow:4px 4px 0 #111;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:monospace">${count}</div>`,
+    iconSize: [42, 42],
+    iconAnchor: [21, 21],
+  });
+}
+
 export default function MapView({ complaints }: MapViewProps) {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -51,6 +61,17 @@ export default function MapView({ complaints }: MapViewProps) {
   const complaintsWithLocation = useMemo(() => {
     return complaints.filter(c => c.location);
   }, [complaints]);
+
+  const clusters = useMemo(() => {
+    const grouped = new Map<string, Complaint[]>();
+    complaintsWithLocation.forEach((complaint) => {
+      const latitude = Math.round(complaint.location!.lat * 100) / 100;
+      const longitude = Math.round(complaint.location!.lng * 100) / 100;
+      const key = `${latitude}:${longitude}`;
+      grouped.set(key, [...(grouped.get(key) || []), complaint]);
+    });
+    return Array.from(grouped.values());
+  }, [complaintsWithLocation]);
 
   if (!isMounted) {
     return (
@@ -76,7 +97,33 @@ export default function MapView({ complaints }: MapViewProps) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {complaintsWithLocation.map((complaint) => {
+      {clusters.map((cluster) => {
+        if (cluster.length > 1) {
+          const latitude = cluster.reduce((sum, complaint) => sum + complaint.location!.lat, 0) / cluster.length;
+          const longitude = cluster.reduce((sum, complaint) => sum + complaint.location!.lng, 0) / cluster.length;
+          return (
+            <Marker
+              key={`cluster-${cluster.map((complaint) => complaint.complaintId).join('-')}`}
+              position={[latitude, longitude]}
+              icon={createClusterIcon(cluster.length)}
+            >
+              <Popup>
+                <div className="min-w-[220px] font-sans">
+                  <div className="mb-2 font-black uppercase">{cluster.length} ISSUES IN THIS AREA</div>
+                  <div className="space-y-1">
+                    {cluster.map((complaint) => (
+                      <a key={complaint.complaintId} href={`/complaints/${complaint.complaintId}`} className="block text-xs font-bold underline">
+                        {complaint.complaintId} · {complaint.title}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </Popup>
+            </Marker>
+          );
+        }
+
+        const complaint = cluster[0];
         const color = STATUS_COLORS[complaint.status];
         const customIcon = createCustomIcon(color);
 

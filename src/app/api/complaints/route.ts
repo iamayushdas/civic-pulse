@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { Complaint } from '@/types';
 import { createComplaintSchema, complaintQuerySchema } from '@/lib/validations/complaint';
-import { generateComplaintId } from '@/lib/utils';
+import { generateComplaintId, getSlaDueAt } from '@/lib/utils';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
     const db = await getDb();
     const complaintsCollection = db.collection<Complaint>('complaints');
 
+    const createdAt = new Date();
     const complaint: Complaint = {
       complaintId: generateComplaintId(),
       category: validatedData.category,
@@ -25,8 +26,11 @@ export async function POST(request: NextRequest) {
       pincode: validatedData.pincode,
       status: 'SUBMITTED',
       priority: 'MEDIUM',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt,
+      updatedAt: createdAt,
+      slaDueAt: getSlaDueAt(createdAt, 'MEDIUM'),
+      confirmationCount: 0,
+      confirmationKeys: [],
       anonymous: validatedData.anonymous,
       citizenName: validatedData.citizenName,
       citizenPhone: validatedData.citizenPhone,
@@ -88,7 +92,18 @@ export async function GET(request: NextRequest) {
     if (validatedQuery.ward) filter.push({ ward: validatedQuery.ward });
     if (validatedQuery.pincode) filter.push({ pincode: validatedQuery.pincode });
     if (validatedQuery.department) filter.push({ department: validatedQuery.department });
+    if (validatedQuery.assignedTo) filter.push({ assignedTo: { $regex: validatedQuery.assignedTo, $options: 'i' } });
     if (validatedQuery.priority) filter.push({ priority: validatedQuery.priority });
+    if (validatedQuery.overdue === 'true') {
+      filter.push({
+        slaDueAt: { $lt: new Date() },
+        status: { $nin: ['RESOLVED', 'REJECTED', 'DUPLICATE'] },
+      });
+    }
+    if (validatedQuery.q) {
+      const search = { $regex: validatedQuery.q, $options: 'i' };
+      filter.push({ $or: [{ complaintId: search }, { title: search }, { description: search }, { area: search }] });
+    }
 
     const mongoFilter: Record<string, any> = { $and: filter };
 

@@ -1,20 +1,24 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Save } from 'lucide-react';
 import { Button } from '@/components/brutal/Button';
 import { Card, CardContent, CardHeader } from '@/components/brutal/Card';
 import { Badge } from '@/components/brutal/Badge';
 import { Select } from '@/components/brutal/Select';
-import { Textarea } from '@/components/brutal/Input';
+import { Input, Textarea } from '@/components/brutal/Input';
 import { AdminAccessGuard } from '@/components/admin/AdminAccessGuard';
+import DuplicateSuggestions from '@/components/admin/DuplicateSuggestions';
+import ImageUpload from '@/components/brutal/ImageUpload';
 import { CATEGORY_LABELS, STATUS_LABELS, ComplaintCategory, ComplaintStatus } from '@/types';
 import { formatDateTime } from '@/lib/utils';
+import { DEPARTMENT_OPTIONS } from '@/lib/departments';
 
-export default function AdminComplaintDetailPage({ params }: { params: { id: string } }) {
+export default function AdminComplaintDetailPage() {
   const router = useRouter();
+  const params = useParams<{ id: string }>();
   const [complaint, setComplaint] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
@@ -26,6 +30,8 @@ export default function AdminComplaintDetailPage({ params }: { params: { id: str
     note: '',
     assignedTo: '',
     resolutionNote: '',
+    resolutionImages: '',
+    duplicateOf: '',
   });
 
   useEffect(() => {
@@ -45,6 +51,8 @@ export default function AdminComplaintDetailPage({ params }: { params: { id: str
         note: '',
         assignedTo: data.assignedTo || '',
         resolutionNote: data.resolutionNote || '',
+        resolutionImages: (data.resolutionImages || []).join('\n'),
+        duplicateOf: data.duplicateOf || '',
       });
     } catch (error) {
       console.error('Failed to fetch complaint:', error);
@@ -60,7 +68,12 @@ export default function AdminComplaintDetailPage({ params }: { params: { id: str
       const response = await fetch(`/api/complaints/${params.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updateData),
+        body: JSON.stringify({
+          ...updateData,
+          resolutionImages: updateData.resolutionImages
+            .split(/\s*[\n,]\s*/)
+            .filter(Boolean),
+        }),
       });
 
       if (!response.ok) throw new Error('Failed to update complaint');
@@ -206,6 +219,10 @@ export default function AdminComplaintDetailPage({ params }: { params: { id: str
 
             {/* Admin Actions */}
             <div className="space-y-6">
+              <DuplicateSuggestions
+                complaintId={complaint.complaintId}
+                onSelect={(duplicateOf) => setUpdateData({ ...updateData, duplicateOf, status: 'DUPLICATE' })}
+              />
               <Card>
                 <CardHeader>
                   <h3 className="font-bold">UPDATE STATUS</h3>
@@ -243,15 +260,46 @@ export default function AdminComplaintDetailPage({ params }: { params: { id: str
                     rows={3}
                   />
 
+                  <Select
+                    label="DEPARTMENT"
+                    options={[
+                      { value: '', label: 'Select department' },
+                      ...DEPARTMENT_OPTIONS.map((department) => ({ value: department, label: department })),
+                    ]}
+                    value={updateData.department}
+                    onChange={(e) => setUpdateData({ ...updateData, department: e.target.value })}
+                  />
+
+                  <Input
+                    label="ASSIGNED TO"
+                    value={updateData.assignedTo}
+                    onChange={(e) => setUpdateData({ ...updateData, assignedTo: e.target.value })}
+                    placeholder="Officer or team"
+                  />
+
                   {updateData.status === 'RESOLVED' && (
-                    <Textarea
-                      label="RESOLUTION NOTE"
-                      value={updateData.resolutionNote}
-                      onChange={(e) => setUpdateData({ ...updateData, resolutionNote: e.target.value })}
-                      placeholder="Describe how the issue was resolved..."
-                      rows={3}
-                    />
+                    <>
+                      <Textarea
+                        label="RESOLUTION NOTE"
+                        value={updateData.resolutionNote}
+                        onChange={(e) => setUpdateData({ ...updateData, resolutionNote: e.target.value })}
+                        placeholder="Describe how the issue was resolved..."
+                        rows={3}
+                      />
+                      <ImageUpload
+                        label="RESOLUTION PROOF IMAGES"
+                        images={updateData.resolutionImages.split(/\s*[\n,]\s*/).filter(Boolean)}
+                        onChange={(images) => setUpdateData({ ...updateData, resolutionImages: images.join('\n') })}
+                      />
+                    </>
                   )}
+
+                  <Input
+                    label="DUPLICATE OF"
+                    value={updateData.duplicateOf}
+                    onChange={(e) => setUpdateData({ ...updateData, duplicateOf: e.target.value })}
+                    placeholder="Complaint ID, if duplicate"
+                  />
 
                   <Button
                     variant="primary"

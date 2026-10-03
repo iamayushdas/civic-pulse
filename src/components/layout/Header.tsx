@@ -6,11 +6,14 @@ import { Menu, X, Bell, User, LogOut } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/components/brutal/AuthProvider';
+import { LanguageToggle } from '@/components/layout/LanguageToggle';
+import { useTranslation } from '@/lib/i18n';
 
 export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const { user, logout } = useAuth();
+  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -66,7 +69,7 @@ export function Header() {
                   : 'bg-white text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
               )}
             >
-              Home
+              {t('home')}
             </Link>
             <Link
               href="/report"
@@ -77,7 +80,7 @@ export function Header() {
                   : 'bg-cyan-400 text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
               )}
             >
-              Report
+              {t('report')}
             </Link>
             <Link
               href="/complaints"
@@ -88,7 +91,7 @@ export function Header() {
                   : 'bg-white text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
               )}
             >
-              Track
+              {t('track')}
             </Link>
             <Link
               href="/map"
@@ -99,7 +102,7 @@ export function Header() {
                   : 'bg-lime-400 text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
               )}
             >
-              Map
+              {t('map')}
             </Link>
             <Link
               href="/area"
@@ -110,9 +113,8 @@ export function Header() {
                   : 'bg-white text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
               )}
             >
-              Areas
+              {t('areas')}
             </Link>
-
             {/* Icon Buttons */}
             <button className="ml-2 w-11 h-11 bg-pink-400 border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center">
               <Bell className="w-5 h-5" strokeWidth={3} />
@@ -137,13 +139,17 @@ export function Header() {
                         <p className="text-xs font-bold mt-1 uppercase">{user.role}</p>
                       </div>
                       <div className="p-2">
+                        <div className="flex items-center justify-between border-b-2 border-black px-4 py-3">
+                          <span className="text-xs font-black uppercase">Language</span>
+                          <LanguageToggle />
+                        </div>
                         {user.role === 'OFFICER' || user.role === 'SUPERADMIN' ? (
                           <Link
                             href="/admin"
                             onClick={() => setUserMenuOpen(false)}
                             className="block px-4 py-3 font-bold text-sm uppercase hover:bg-cyan-400 border-2 border-transparent hover:border-black transition-all"
                           >
-                            Admin Dashboard
+                            {t('adminDashboard')}
                           </Link>
                         ) : null}
                         <button
@@ -151,7 +157,7 @@ export function Header() {
                           className="w-full flex items-center gap-2 px-4 py-3 font-bold text-sm uppercase hover:bg-red-500 hover:text-white border-2 border-transparent hover:border-black transition-all text-left"
                         >
                           <LogOut className="w-4 h-4" strokeWidth={3} />
-                          Logout
+                          {t('logout')}
                         </button>
                       </div>
                     </div>
@@ -193,7 +199,7 @@ export function Header() {
               )}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Home
+              {t('home')}
             </Link>
             <Link
               href="/report"
@@ -205,7 +211,7 @@ export function Header() {
               )}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Report
+              {t('report')}
             </Link>
             <Link
               href="/complaints"
@@ -217,7 +223,7 @@ export function Header() {
               )}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Track
+              {t('track')}
             </Link>
             <Link
               href="/map"
@@ -229,7 +235,7 @@ export function Header() {
               )}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Map
+              {t('map')}
             </Link>
             <Link
               href="/area"
@@ -241,18 +247,21 @@ export function Header() {
               )}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Areas
+              {t('areas')}
             </Link>
-
             {user ? (
               <>
+                <div className="flex items-center justify-between border-4 border-black bg-yellow-300 px-5 py-3">
+                  <span className="text-xs font-black uppercase">Language</span>
+                  <LanguageToggle />
+                </div>
                 {user.role === 'OFFICER' || user.role === 'SUPERADMIN' ? (
                   <Link
                     href="/admin"
                     className="px-5 py-4 font-black uppercase text-sm tracking-wide border-4 border-black bg-cyan-400 text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Admin Dashboard
+                    {t('adminDashboard')}
                   </Link>
                 ) : null}
                 <button

@@ -11,6 +11,19 @@ export function generateComplaintId(): string {
   return `DL-${timestamp}${random}`;
 }
 
+export function getSlaDays(priority: string): number {
+  if (priority === 'URGENT') return 2;
+  if (priority === 'HIGH') return 5;
+  if (priority === 'LOW') return 14;
+  return 7;
+}
+
+export function getSlaDueAt(createdAt: Date, priority: string): Date {
+  const dueAt = new Date(createdAt);
+  dueAt.setDate(dueAt.getDate() + getSlaDays(priority));
+  return dueAt;
+}
+
 export function formatDate(date: Date | string): string {
   const d = typeof date === 'string' ? new Date(date) : date;
   return new Intl.DateTimeFormat('en-IN', {

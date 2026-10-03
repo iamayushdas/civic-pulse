@@ -52,6 +52,11 @@
   img {
     @apply max-w-full;
   }
+
+  :focus-visible {
+    outline: 4px solid #0ea5e9;
+    outline-offset: 3px;
+  }
   
   /* Prevent horizontal overflow */
   #__next,

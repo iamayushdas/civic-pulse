@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { Complaint } from '@/types';
 import { updateComplaintStatusSchema } from '@/lib/validations/complaint';
+import { notifyComplaintStatusChange } from '@/lib/notifications';
+import { getSlaDueAt } from '@/lib/utils';
 
 export async function GET(
   request: NextRequest,
@@ -68,14 +70,19 @@ export async function PATCH(
 
     if (validatedData.assignedTo) updateData.assignedTo = validatedData.assignedTo;
     if (validatedData.department) updateData.department = validatedData.department;
-    if (validatedData.priority) updateData.priority = validatedData.priority;
+    if (validatedData.priority) {
+      updateData.priority = validatedData.priority;
+      updateData.slaDueAt = getSlaDueAt(new Date(complaint.createdAt), validatedData.priority);
+    }
     if (validatedData.resolutionNote) updateData.resolutionNote = validatedData.resolutionNote;
     if (validatedData.resolutionImages) updateData.resolutionImages = validatedData.resolutionImages;
+    if (validatedData.duplicateOf) updateData.duplicateOf = validatedData.duplicateOf;
 
     const statusHistoryEntry = {
       status: validatedData.status,
       timestamp: new Date(),
       note: validatedData.note,
+      isPublic: true,
     };
 
     await complaintsCollection.updateOne(
@@ -89,6 +96,10 @@ export async function PATCH(
     const updatedComplaint = await complaintsCollection.findOne({
       complaintId: id,
     });
+
+    if (updatedComplaint && complaint.status !== validatedData.status) {
+      void notifyComplaintStatusChange(updatedComplaint, validatedData.note);
+    }
 
     return NextResponse.json(updatedComplaint);
   } catch (error: any) {

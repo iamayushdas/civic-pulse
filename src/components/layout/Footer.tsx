@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useAuth } from '@/components/brutal/AuthProvider';
+import { useTranslation } from '@/lib/i18n';
 
 export function Footer() {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const isAdmin = user?.role === 'OFFICER' || user?.role === 'SUPERADMIN';
 
   return (
@@ -14,32 +16,33 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4 label-editorial">DELHI CIVIC</h3>
             <p className="text-sm text-civic-white/80 leading-relaxed">
-              A public civic platform for Delhi residents to report problems and track their resolution.
+              {t('publicPlatformDescription')}
             </p>
           </div>
           
           <div>
-            <h4 className="font-bold text-sm mb-4 label-editorial">REPORT</h4>
+            <h4 className="font-bold text-sm mb-4 label-editorial">{t('report')}</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/report" className="hover:text-civic-accent transition-colors">New Complaint</Link></li>
-              <li><Link href="/complaints" className="hover:text-civic-accent transition-colors">Track Complaint</Link></li>
-              <li><Link href="/map" className="hover:text-civic-accent transition-colors">Map View</Link></li>
+              <li><Link href="/report" className="hover:text-civic-accent transition-colors">{t('newComplaint')}</Link></li>
+              <li><Link href="/complaints" className="hover:text-civic-accent transition-colors">{t('trackComplaint')}</Link></li>
+              <li><Link href="/map" className="hover:text-civic-accent transition-colors">{t('mapView')}</Link></li>
+              <li><Link href="/transparency" className="hover:text-civic-accent transition-colors">{t('transparency')}</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-bold text-sm mb-4 label-editorial">EXPLORE</h4>
+            <h4 className="font-bold text-sm mb-4 label-editorial">{t('areas')}</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/area" className="hover:text-civic-accent transition-colors">Your Area</Link></li>
-              <li><Link href="/complaints?status=RESOLVED" className="hover:text-civic-accent transition-colors">Resolved Issues</Link></li>
-              <li><Link href="/complaints?status=IN_PROGRESS" className="hover:text-civic-accent transition-colors">Active Cases</Link></li>
+              <li><Link href="/area" className="hover:text-civic-accent transition-colors">{t('yourArea')}</Link></li>
+              <li><Link href="/complaints?status=RESOLVED" className="hover:text-civic-accent transition-colors">{t('resolvedIssues')}</Link></li>
+              <li><Link href="/complaints?status=IN_PROGRESS" className="hover:text-civic-accent transition-colors">{t('activeCases')}</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-bold text-sm mb-4 label-editorial">OFFICE</h4>
             <p className="text-xs text-civic-white/60 leading-relaxed mb-3">
-              Civic reporting and local issue resolution for residents across Delhi.
+              {t('civicOfficeDescription')}
             </p>
             {isAdmin && (
               <Link href="/admin" className="text-xs font-bold text-civic-accent hover:underline">

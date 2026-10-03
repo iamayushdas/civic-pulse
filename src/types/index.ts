@@ -39,6 +39,17 @@ export interface StatusHistoryEntry {
   timestamp: Date;
   note?: string;
   updatedBy?: string;
+  isPublic?: boolean;
+}
+
+export interface ComplaintComment {
+  _id?: string;
+  complaintId: string;
+  authorName: string;
+  authorEmail?: string;
+  body: string;
+  createdAt: Date;
+  isPublic: boolean;
 }
 
 export interface Complaint {
@@ -66,6 +77,10 @@ export interface Complaint {
   assignedTo?: string;
   resolutionNote?: string;
   resolutionImages?: string[];
+  slaDueAt?: Date;
+  duplicateOf?: string;
+  confirmationCount?: number;
+  confirmationKeys?: string[];
   statusHistory: StatusHistoryEntry[];
   viewCount: number;
 }

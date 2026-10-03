@@ -1,4 +1,7 @@
 import { MongoClient } from 'mongodb';
+import { loadEnvConfig } from '@next/env';
+
+loadEnvConfig(process.cwd());
 
 const validRoles = new Set(['CITIZEN', 'OFFICER', 'SUPERADMIN']);
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';

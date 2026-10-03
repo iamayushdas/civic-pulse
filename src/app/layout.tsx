@@ -64,10 +64,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${spaceMono.variable}`}>
       <body className="flex flex-col min-h-screen overflow-x-hidden">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-civic-white focus:px-4 focus:py-3 focus:font-bold focus:shadow-brutal">
+          Skip to main content
+        </a>
         <PwaRegister />
         <AuthProvider>
           <Header />
-          <main className="flex-1 overflow-x-hidden">
+          <main id="main-content" tabIndex={-1} className="flex-1 overflow-x-hidden">
             {children}
           </main>
           <Footer />

@@ -54,13 +54,45 @@ export async function GET() {
       byStatus[complaint.status]++;
     });
 
-    const stats: Stats = {
+    const departmentMap = new Map<string, { total: number; resolved: number; resolutionHours: number[] }>();
+    const wardMap = new Map<string, number>();
+    let overdue = 0;
+
+    allComplaints.forEach((complaint) => {
+      const department = complaint.department || 'UNASSIGNED';
+      const departmentStats = departmentMap.get(department) || { total: 0, resolved: 0, resolutionHours: [] };
+      departmentStats.total += 1;
+      if (complaint.status === 'RESOLVED') {
+        departmentStats.resolved += 1;
+        const resolvedEntry = complaint.statusHistory?.find((entry) => entry.status === 'RESOLVED');
+        const resolvedAt = resolvedEntry ? new Date(resolvedEntry.timestamp).getTime() : 0;
+        const createdAt = new Date(complaint.createdAt).getTime();
+        if (resolvedAt > createdAt) departmentStats.resolutionHours.push((resolvedAt - createdAt) / 3600000);
+      }
+      departmentMap.set(department, departmentStats);
+      const ward = complaint.ward || 'UNKNOWN';
+      wardMap.set(ward, (wardMap.get(ward) || 0) + 1);
+      if (complaint.slaDueAt && new Date(complaint.slaDueAt) < new Date() && !['RESOLVED', 'REJECTED', 'DUPLICATE'].includes(complaint.status)) overdue += 1;
+    });
+
+    const stats: Stats & { overdue: number; byWard: Record<string, number>; departmentPerformance: Array<Record<string, number | string>> } = {
       total,
       open,
       resolved,
       thisWeek,
       byCategory,
       byStatus,
+      overdue,
+      byWard: Object.fromEntries(wardMap),
+      departmentPerformance: Array.from(departmentMap.entries()).map(([department, values]) => ({
+        department,
+        total: values.total,
+        resolved: values.resolved,
+        resolutionRate: values.total ? Math.round((values.resolved / values.total) * 100) : 0,
+        averageResolutionHours: values.resolutionHours.length
+          ? Math.round(values.resolutionHours.reduce((sum, hours) => sum + hours, 0) / values.resolutionHours.length)
+          : 0,
+      })).sort((left, right) => Number(right.total) - Number(left.total)),
     };
 
     return NextResponse.json(stats);

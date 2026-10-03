@@ -2,12 +2,14 @@
 
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ArrowLeft, MapPin, Camera, User, CheckCircle2, Loader2 } from 'lucide-react';
+import { ArrowRight, ArrowLeft, MapPin, User, CheckCircle2, Loader2 } from 'lucide-react';
 import { Button } from '@/components/brutal/Button';
 import { Card, CardContent, CardHeader } from '@/components/brutal/Card';
 import { Input, Textarea } from '@/components/brutal/Input';
 import { Select } from '@/components/brutal/Select';
 import { CATEGORY_LABELS, COMPLAINT_CATEGORIES, ComplaintCategory } from '@/types';
+import { useTranslation } from '@/lib/i18n';
+import ImageUpload from '@/components/brutal/ImageUpload';
 
 const LocationPicker = lazy(() => import('@/components/map/LocationPicker'));
 
@@ -37,6 +39,28 @@ export default function ReportPage() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pincodeLoading, setPincodeLoading] = useState(false);
+  const { t } = useTranslation();
+  const [draftLoaded, setDraftLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const draft = window.localStorage.getItem('delhi-civic-report-draft');
+      if (draft) {
+        const saved = JSON.parse(draft);
+        if (saved.formData) setFormData(saved.formData);
+        if (typeof saved.currentStep === 'number') setCurrentStep(saved.currentStep);
+      }
+    } catch (error) {
+      console.error('Failed to restore report draft:', error);
+    } finally {
+      setDraftLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!draftLoaded || submittedId) return;
+    window.localStorage.setItem('delhi-civic-report-draft', JSON.stringify({ formData, currentStep }));
+  }, [currentStep, draftLoaded, formData, submittedId]);
 
   const fetchPincodeDetails = async (pincode: string) => {
     if (!/^\d{6}$/.test(pincode)) return;
@@ -127,6 +151,7 @@ export default function ReportPage() {
       }
 
       const data = await response.json();
+      window.localStorage.removeItem('delhi-civic-report-draft');
       setSubmittedId(data.complaintId);
     } catch (error) {
       console.error('Submission error:', error);
@@ -143,13 +168,13 @@ export default function ReportPage() {
             <CardContent className="py-12 text-center">
               <CheckCircle2 size={64} className="mx-auto mb-6" />
               <h1 className="text-3xl sm:text-4xl font-bold mb-4">
-                COMPLAINT REGISTERED
+                {t('complaintRegistered')}
               </h1>
               <div className="text-5xl sm:text-6xl font-bold font-mono mb-6">
                 {submittedId}
               </div>
               <p className="text-lg mb-8">
-                Save this ID to track your complaint.
+                {t('saveTrackId')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
@@ -157,7 +182,7 @@ export default function ReportPage() {
                   size="lg"
                   onClick={() => router.push(`/complaints/${submittedId}`)}
                 >
-                  VIEW COMPLAINT
+                  {t('viewComplaint')}
                   <ArrowRight size={20} />
                 </Button>
                 <Button
@@ -166,7 +191,7 @@ export default function ReportPage() {
                   onClick={() => router.push('/')}
                   className="!text-white !border-white hover:!bg-white hover:!text-civic-accent"
                 >
-                  GO HOME
+                  {t('goHome')}
                 </Button>
               </div>
             </CardContent>
@@ -207,18 +232,18 @@ export default function ReportPage() {
             ))}
           </div>
           <div className="label-mono text-center">
-            STEP {currentStep + 1} / {STEPS.length} — {STEPS[currentStep]}
+            {currentStep + 1} / {STEPS.length} — {STEPS[currentStep]}
           </div>
         </div>
 
         <Card>
           <CardHeader>
             <h1 className="text-2xl sm:text-3xl font-bold">
-              {currentStep === 0 && "WHAT'S WRONG?"}
-              {currentStep === 1 && 'WHERE?'}
-              {currentStep === 2 && 'DETAILS'}
-              {currentStep === 3 && 'CONTACT'}
-              {currentStep === 4 && 'REVIEW'}
+              {currentStep === 0 && t('whatWrong')}
+              {currentStep === 1 && t('where')}
+              {currentStep === 2 && t('details')}
+              {currentStep === 3 && t('contact')}
+              {currentStep === 4 && t('review')}
             </h1>
           </CardHeader>
 
@@ -254,7 +279,7 @@ export default function ReportPage() {
                   <div className="w-full h-64 flex items-center justify-center bg-civic-bg border-2 border-civic-black">
                     <div className="text-center">
                       <div className="inline-block w-12 h-12 border-4 border-civic-black border-t-civic-accent rounded-full animate-spin mb-4"></div>
-                      <p className="font-bold uppercase text-sm">Loading Map...</p>
+                      <p className="font-bold uppercase text-sm">{t('loading')}</p>
                     </div>
                   </div>
                 }>
@@ -324,18 +349,11 @@ export default function ReportPage() {
                   rows={6}
                 />
 
-                <div>
-                  <label className="block label-mono mb-2">PHOTOS (OPTIONAL)</label>
-                  <div className="border-2 border-dashed border-civic-black p-8 text-center bg-civic-bg">
-                    <Camera size={48} className="mx-auto mb-4 text-civic-muted" />
-                    <p className="text-civic-muted font-medium mb-2">
-                      Photo upload placeholder
-                    </p>
-                    <p className="text-sm text-civic-muted">
-                      Up to 5 images
-                    </p>
-                  </div>
-                </div>
+                <ImageUpload
+                  label={t('photosOptional')}
+                  images={formData.images}
+                  onChange={(images) => setFormData({ ...formData, images })}
+                />
               </div>
             )}
 
@@ -350,10 +368,10 @@ export default function ReportPage() {
                       onChange={(e) => setFormData({ ...formData, anonymous: e.target.checked })}
                       className="w-6 h-6 border-2 border-civic-black"
                     />
-                    <span className="font-bold">SUBMIT ANONYMOUSLY</span>
+                    <span className="font-bold">{t('anonymous')}</span>
                   </label>
                   <p className="text-sm text-civic-muted mt-2 ml-9">
-                    You won't receive updates, but your complaint will still be processed.
+                    {t('anonymousNotice')}
                   </p>
                 </div>
 
@@ -446,14 +464,14 @@ export default function ReportPage() {
             {currentStep > 0 && (
               <Button variant="ghost" onClick={handleBack} disabled={isSubmitting}>
                 <ArrowLeft size={20} />
-                BACK
+                {t('back')}
               </Button>
             )}
             
             <div className="ml-auto">
               {currentStep < STEPS.length - 1 ? (
                 <Button variant="primary" onClick={handleNext}>
-                  NEXT
+                  {t('next')}
                   <ArrowRight size={20} />
                 </Button>
               ) : (
@@ -463,7 +481,7 @@ export default function ReportPage() {
                   onClick={handleSubmit}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'SUBMITTING...' : 'SUBMIT COMPLAINT'}
+                  {isSubmitting ? t('submitting') : t('submitComplaint')}
                   <ArrowRight size={20} />
                 </Button>
               )}

@@ -11,8 +11,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          variant === 'default' && 'card-brutal',
-          variant === 'accent' && 'card-brutal-accent',
+          variant === 'default' && 'card-brutal text-civic-black',
+          variant === 'accent' && 'card-brutal-accent text-civic-white',
           className
         )}
         {...props}

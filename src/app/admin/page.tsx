@@ -194,17 +194,6 @@ export default async function AdminPage() {
             </Card>
           </div>
 
-          {/* Prototype Notice */}
-          <Card variant="accent" className="mt-12">
-            <CardContent className="text-center py-8">
-              <h3 className="text-xl font-bold mb-3 text-civic-white">
-                ⚠ PROTOTYPE NOTICE
-              </h3>
-              <p className="text-civic-white/90">
-                This is a demonstration admin panel. In production, this would be secured with proper authentication, role-based access control, and audit logging.
-              </p>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </AdminAccessGuard>
