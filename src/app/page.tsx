@@ -8,6 +8,7 @@ import { CATEGORY_LABELS, ComplaintCategory } from '@/types';
 import { formatRelativeTime } from '@/lib/utils';
 import { AnimatedMetro, AnimatedBus, AnimatedAutoRickshaw, AnimatedDTCBus, AnimatedCycleRickshaw, AnimatedWaterTanker } from '@/components/home/AnimatedVehicles';
 import { HeroRotatingHeadline } from '@/components/home/HeroRotatingHeadline';
+import { ReportIssueCta } from '@/components/home/ReportIssueCta';
 import { getDb } from '@/lib/mongodb';
 
 // Force dynamic rendering
@@ -165,13 +166,7 @@ export default async function HomePage() {
               
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/report">
-                  <button className="group relative px-8 py-4 bg-red-500 text-white font-black text-lg uppercase border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all flex items-center gap-2">
-                    <Rocket className="w-6 h-6" strokeWidth={3} />
-                    Report Issue
-                    <ArrowRight className="w-6 h-6" strokeWidth={3} />
-                  </button>
-                </Link>
+                <ReportIssueCta />
                 <Link href="/complaints">
                   <button className="px-8 py-4 bg-white text-black font-black text-lg uppercase border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all">
                     Track Status

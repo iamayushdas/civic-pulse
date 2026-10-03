@@ -243,6 +243,37 @@ export function Header() {
             >
               Areas
             </Link>
+
+            {user ? (
+              <>
+                {user.role === 'OFFICER' || user.role === 'SUPERADMIN' ? (
+                  <Link
+                    href="/admin"
+                    className="px-5 py-4 font-black uppercase text-sm tracking-wide border-4 border-black bg-cyan-400 text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Admin Dashboard
+                  </Link>
+                ) : null}
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="px-5 py-4 font-black uppercase text-sm tracking-wide border-4 border-black bg-red-500 text-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none text-left"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="px-5 py-4 font-black uppercase text-sm tracking-wide border-4 border-black bg-purple-400 text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Login
+              </Link>
+            )}
           </div>
         </nav>
       )}
