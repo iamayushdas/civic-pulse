@@ -75,23 +75,30 @@ export async function GET(request: NextRequest) {
     const db = await getDb();
     const complaintsCollection = db.collection<Complaint>('complaints');
 
-    const filter: any = {};
+    const filter: any[] = [
+      { complaintId: { $exists: true, $ne: null } },
+      { status: { $exists: true, $ne: null } },
+      { title: { $exists: true, $ne: null } },
+      { category: { $exists: true, $ne: null } },
+    ];
 
-    if (validatedQuery.category) filter.category = validatedQuery.category;
-    if (validatedQuery.status) filter.status = validatedQuery.status;
-    if (validatedQuery.area) filter.area = { $regex: validatedQuery.area, $options: 'i' };
-    if (validatedQuery.ward) filter.ward = validatedQuery.ward;
-    if (validatedQuery.pincode) filter.pincode = validatedQuery.pincode;
-    if (validatedQuery.department) filter.department = validatedQuery.department;
-    if (validatedQuery.priority) filter.priority = validatedQuery.priority;
+    if (validatedQuery.category) filter.push({ category: validatedQuery.category });
+    if (validatedQuery.status) filter.push({ status: validatedQuery.status });
+    if (validatedQuery.area) filter.push({ area: { $regex: validatedQuery.area, $options: 'i' } });
+    if (validatedQuery.ward) filter.push({ ward: validatedQuery.ward });
+    if (validatedQuery.pincode) filter.push({ pincode: validatedQuery.pincode });
+    if (validatedQuery.department) filter.push({ department: validatedQuery.department });
+    if (validatedQuery.priority) filter.push({ priority: validatedQuery.priority });
+
+    const mongoFilter: Record<string, any> = { $and: filter };
 
     if (validatedQuery.fromDate || validatedQuery.toDate) {
-      filter.createdAt = {};
+      mongoFilter.createdAt = {};
       if (validatedQuery.fromDate) {
-        filter.createdAt.$gte = new Date(validatedQuery.fromDate);
+        mongoFilter.createdAt.$gte = new Date(validatedQuery.fromDate);
       }
       if (validatedQuery.toDate) {
-        filter.createdAt.$lte = new Date(validatedQuery.toDate);
+        mongoFilter.createdAt.$lte = new Date(validatedQuery.toDate);
       }
     }
 
@@ -104,12 +111,12 @@ export async function GET(request: NextRequest) {
 
     const [complaints, total] = await Promise.all([
       complaintsCollection
-        .find(filter)
+        .find(mongoFilter)
         .sort({ [sortBy]: sortOrder })
         .skip(skip)
         .limit(limit)
         .toArray(),
-      complaintsCollection.countDocuments(filter),
+      complaintsCollection.countDocuments(mongoFilter),
     ]);
 
     return NextResponse.json({

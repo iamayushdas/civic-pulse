@@ -21,6 +21,10 @@ export async function GET() {
 
     const byCategory: Record<ComplaintCategory, number> = {
       WATER_SUPPLY: 0,
+      ADMINISTRATION: 0,
+      WATER_SUPPLY_SEWAGE: 0,
+      POLLUTION_CONTROL: 0,
+      MUNICIPAL_CIVIC: 0,
       ROADS: 0,
       GARBAGE: 0,
       DRAINAGE: 0,

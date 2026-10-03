@@ -12,6 +12,10 @@ export type ComplaintPriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
 
 export type ComplaintCategory =
   | 'WATER_SUPPLY'
+  | 'ADMINISTRATION'
+  | 'WATER_SUPPLY_SEWAGE'
+  | 'POLLUTION_CONTROL'
+  | 'MUNICIPAL_CIVIC'
   | 'ROADS'
   | 'GARBAGE'
   | 'DRAINAGE'
@@ -97,6 +101,60 @@ export interface Area {
   complaintCount: number;
 }
 
+export interface MLA {
+  _id?: string;
+  name: string;
+  constituency: string;
+  constituencyId?: string;
+  party: string;
+  state: string;
+  district?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  photoUrl?: string;
+  termStart?: Date;
+  termEnd?: Date;
+  isActive: boolean;
+  pincodes?: string[];
+  assemblyConstituency?: string;
+}
+
+export interface DepartmentHead {
+  _id?: string;
+  name: string;
+  designation: string;
+  department: string;
+  departmentCategory: ComplaintCategory;
+  state: string;
+  district?: string;
+  city?: string;
+  pincode?: string;
+  ward?: string;
+  phone?: string;
+  email?: string;
+  officeAddress?: string;
+  photoUrl?: string;
+  isActive: boolean;
+  jurisdiction?: string;
+}
+
+export interface Representative {
+  type: 'MLA' | 'DEPARTMENT_HEAD' | 'WARD_OFFICER' | 'MP' | 'MAYOR' | 'COUNCILLOR';
+  name: string;
+  designation: string;
+  department?: string;
+  party?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  photoUrl?: string;
+  jurisdiction?: string;
+  pincode?: string;
+  area?: string;
+  ward?: string;
+}
+
 export interface ComplaintUpdate {
   _id?: string;
   complaintId: string;
@@ -120,6 +178,10 @@ export interface Stats {
 
 export const CATEGORY_LABELS: Record<ComplaintCategory, string> = {
   WATER_SUPPLY: 'Water Supply',
+  ADMINISTRATION: 'Administration',
+  WATER_SUPPLY_SEWAGE: 'Water Supply & Sewage',
+  POLLUTION_CONTROL: 'Pollution Control',
+  MUNICIPAL_CIVIC: 'Municipal / Civic',
   ROADS: 'Roads',
   GARBAGE: 'Garbage',
   DRAINAGE: 'Drainage',
@@ -132,6 +194,21 @@ export const CATEGORY_LABELS: Record<ComplaintCategory, string> = {
   STRAY_ANIMALS: 'Stray Animals',
   OTHER: 'Other',
 };
+
+export const COMPLAINT_CATEGORIES: ComplaintCategory[] = [
+  'WATER_SUPPLY',
+  'ROADS',
+  'GARBAGE',
+  'DRAINAGE',
+  'SEWERAGE',
+  'STREETLIGHTS',
+  'PARKS',
+  'POLLUTION',
+  'ILLEGAL_DUMPING',
+  'PUBLIC_TOILETS',
+  'STRAY_ANIMALS',
+  'OTHER',
+];
 
 export const STATUS_LABELS: Record<ComplaintStatus, string> = {
   SUBMITTED: 'Submitted',

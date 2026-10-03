@@ -1,6 +1,12 @@
+'use client';
+
 import Link from 'next/link';
+import { useAuth } from '@/components/brutal/AuthProvider';
 
 export function Footer() {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'OFFICER' || user?.role === 'SUPERADMIN';
+
   return (
     <footer className="border-t-2 border-civic-black bg-civic-black text-civic-white mt-auto">
       <div className="container mx-auto px-4 py-8 sm:py-12">
@@ -31,19 +37,21 @@ export function Footer() {
           </div>
           
           <div>
-            <h4 className="font-bold text-sm mb-4 label-editorial">PROTOTYPE</h4>
+            <h4 className="font-bold text-sm mb-4 label-editorial">OFFICE</h4>
             <p className="text-xs text-civic-white/60 leading-relaxed mb-3">
-              This is a demonstration portal. Not officially connected to Delhi Government departments.
+              Civic reporting and local issue resolution for residents across Delhi.
             </p>
-            <Link href="/admin" className="text-xs font-bold text-civic-accent hover:underline">
-              ADMIN LOGIN →
-            </Link>
+            {isAdmin && (
+              <Link href="/admin" className="text-xs font-bold text-civic-accent hover:underline">
+                ADMIN LOGIN →
+              </Link>
+            )}
           </div>
         </div>
         
         <div className="mt-8 pt-8 border-t border-civic-white/20">
           <p className="text-xs text-civic-white/60 text-center font-mono">
-            DELHI CIVIC © 2026 // PROTOTYPE DEMONSTRATION // NOT AN OFFICIAL GOVERNMENT PORTAL
+            DELHI CIVIC © 2026 // BUILT BY AYUSH DAS
           </p>
         </div>
       </div>

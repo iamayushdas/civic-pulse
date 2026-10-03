@@ -4,9 +4,10 @@ import { ArrowLeft, MapPin, Calendar, Eye } from 'lucide-react';
 import { Button } from '@/components/brutal/Button';
 import { Card, CardContent, CardHeader } from '@/components/brutal/Card';
 import { Badge } from '@/components/brutal/Badge';
-import { CATEGORY_LABELS, STATUS_LABELS, Complaint, ComplaintCategory } from '@/types';
+import { CATEGORY_LABELS, Complaint, ComplaintCategory } from '@/types';
 import { formatDate, formatRelativeTime } from '@/lib/utils';
 import ComplaintLocationMap from '@/components/map/ComplaintLocationMapClient';
+import RepresentativesCard from '@/components/brutal/RepresentativesCard';
 
 async function getComplaint(id: string): Promise<Complaint | null> {
   try {
@@ -236,6 +237,8 @@ export default async function ComplaintDetailPage({
               </CardContent>
             </Card>
           )}
+
+          <RepresentativesCard pincode={complaint.pincode} category={complaint.category} />
 
           {/* Priority */}
           <Card>

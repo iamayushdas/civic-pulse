@@ -7,6 +7,7 @@ import { Ticker } from '@/components/layout/Ticker';
 import { CATEGORY_LABELS, ComplaintCategory } from '@/types';
 import { formatRelativeTime } from '@/lib/utils';
 import { AnimatedMetro, AnimatedBus, AnimatedAutoRickshaw, AnimatedDTCBus, AnimatedCycleRickshaw, AnimatedWaterTanker } from '@/components/home/AnimatedVehicles';
+import { HeroRotatingHeadline } from '@/components/home/HeroRotatingHeadline';
 import { getDb } from '@/lib/mongodb';
 
 // Force dynamic rendering
@@ -148,12 +149,8 @@ export default async function HomePage() {
               
               {/* Main Heading */}
               <div className="space-y-4">
-                <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
-                  <span className="block">DELHI</span>
-                  <span className="block bg-black text-yellow-300 px-2 inline-block transform -rotate-1 my-2">CIVIC</span>
-                  <span className="block">PULSE</span>
-                </h1>
-                
+                <HeroRotatingHeadline />
+
                 {/* Underline decoration */}
                 <div className="flex gap-2">
                   <div className="h-3 w-24 bg-red-500 border-2 border-black"></div>
@@ -163,8 +160,7 @@ export default async function HomePage() {
               </div>
               
               <p className="text-xl sm:text-2xl font-bold leading-relaxed max-w-xl">
-                Report civic issues. Track progress in real-time. Drive change. 
-                <span className="bg-yellow-300 px-2 border-2 border-black inline-block mt-2"> Your voice matters!</span>
+                Report civic issues. Track progress in real-time. Drive change.
               </p>
               
               {/* CTA Buttons */}

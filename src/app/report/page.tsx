@@ -7,7 +7,7 @@ import { Button } from '@/components/brutal/Button';
 import { Card, CardContent, CardHeader } from '@/components/brutal/Card';
 import { Input, Textarea } from '@/components/brutal/Input';
 import { Select } from '@/components/brutal/Select';
-import { CATEGORY_LABELS, ComplaintCategory } from '@/types';
+import { CATEGORY_LABELS, COMPLAINT_CATEGORIES, ComplaintCategory } from '@/types';
 
 const LocationPicker = lazy(() => import('@/components/map/LocationPicker'));
 
@@ -112,7 +112,14 @@ export default function ReportPage() {
       const response = await fetch('/api/complaints', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          ward: formData.ward || undefined,
+          pincode: formData.pincode || undefined,
+          citizenName: formData.citizenName || undefined,
+          citizenPhone: formData.citizenPhone || undefined,
+          citizenEmail: formData.citizenEmail || undefined,
+        }),
       });
 
       if (!response.ok) {
@@ -219,7 +226,7 @@ export default function ReportPage() {
             {/* Step 0: Category */}
             {currentStep === 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {(Object.keys(CATEGORY_LABELS) as ComplaintCategory[]).map((category) => (
+                {COMPLAINT_CATEGORIES.map((category) => (
                   <button
                     key={category}
                     onClick={() => setFormData({ ...formData, category })}
