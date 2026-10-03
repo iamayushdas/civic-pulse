@@ -11,8 +11,11 @@ import RepresentativesCard from '@/components/brutal/RepresentativesCard';
 
 async function getComplaint(id: string): Promise<Complaint | null> {
   try {
+    const apiUrl =
+      process.env.NEXT_PUBLIC_API_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/complaints/${id}`,
+      `${apiUrl}/api/complaints/${id}`,
       { cache: 'no-store' }
     );
     if (!res.ok) return null;
