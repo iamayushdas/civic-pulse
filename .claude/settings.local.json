@@ -66,7 +66,13 @@
       "Bash(curl -s http://localhost:3000/issues)",
       "Bash(# Kill Next.js and restart to see logs *)",
       "Bash(npm --version)",
-      "Bash(npx --yes create-next-app@latest . --ts --tailwind --app --eslint --src-dir --import-alias \"@/*\" --use-npm --no-turbopack --yes)"
+      "Bash(npx --yes create-next-app@latest . --ts --tailwind --app --eslint --src-dir --import-alias \"@/*\" --use-npm --no-turbopack --yes)",
+      "Bash(npx --yes shadcn@latest init -d -y --base-color neutral --css src/app/globals.css --utils src/lib/utils.ts --components components --hooks hooks --lib lib)",
+      "Bash(npx --yes shadcn@latest init --help)",
+      "Bash(npx --yes shadcn@latest init -d)",
+      "Bash(npx --yes shadcn@latest add card input label textarea select badge separator tabs avatar progress skeleton tooltip sonner dialog -y)",
+      "Bash(npx shadcn *)",
+      "Bash(npx shadcn@latest add chart sheet accordion scroll-area dropdown-menu navigation-menu separator --yes)"
     ]
   }
 }

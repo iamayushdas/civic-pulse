@@ -1,0 +1,152 @@
+export type ComplaintStatus =
+  | 'SUBMITTED'
+  | 'VERIFIED'
+  | 'ASSIGNED'
+  | 'IN_PROGRESS'
+  | 'RESOLVED'
+  | 'REOPENED'
+  | 'REJECTED'
+  | 'DUPLICATE';
+
+export type ComplaintPriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
+
+export type ComplaintCategory =
+  | 'WATER_SUPPLY'
+  | 'ROADS'
+  | 'GARBAGE'
+  | 'DRAINAGE'
+  | 'SEWERAGE'
+  | 'STREETLIGHTS'
+  | 'PARKS'
+  | 'POLLUTION'
+  | 'ILLEGAL_DUMPING'
+  | 'PUBLIC_TOILETS'
+  | 'STRAY_ANIMALS'
+  | 'OTHER';
+
+export interface Location {
+  lat: number;
+  lng: number;
+  address?: string;
+}
+
+export interface StatusHistoryEntry {
+  status: ComplaintStatus;
+  timestamp: Date;
+  note?: string;
+  updatedBy?: string;
+}
+
+export interface Complaint {
+  _id?: string;
+  complaintId: string;
+  category: ComplaintCategory;
+  subCategory?: string;
+  title: string;
+  description: string;
+  images: string[];
+  location: Location;
+  area: string;
+  ward?: string;
+  pincode?: string;
+  department?: string;
+  status: ComplaintStatus;
+  priority: ComplaintPriority;
+  createdAt: Date;
+  updatedAt: Date;
+  citizenId?: string;
+  citizenName?: string;
+  citizenPhone?: string;
+  citizenEmail?: string;
+  anonymous: boolean;
+  assignedTo?: string;
+  resolutionNote?: string;
+  resolutionImages?: string[];
+  statusHistory: StatusHistoryEntry[];
+  viewCount: number;
+}
+
+export interface User {
+  _id?: string;
+  name: string;
+  email: string;
+  phone?: string;
+  password: string;
+  role: 'citizen' | 'admin' | 'department';
+  department?: string;
+  createdAt: Date;
+  isActive: boolean;
+}
+
+export interface Department {
+  _id?: string;
+  name: string;
+  code: string;
+  categories: ComplaintCategory[];
+  contactEmail?: string;
+  contactPhone?: string;
+  isActive: boolean;
+}
+
+export interface Area {
+  _id?: string;
+  name: string;
+  ward?: string;
+  pincode: string;
+  district: string;
+  complaintCount: number;
+}
+
+export interface ComplaintUpdate {
+  _id?: string;
+  complaintId: string;
+  status: ComplaintStatus;
+  note: string;
+  images?: string[];
+  updatedBy: string;
+  updatedByName: string;
+  timestamp: Date;
+  isPublic: boolean;
+}
+
+export interface Stats {
+  total: number;
+  open: number;
+  resolved: number;
+  thisWeek: number;
+  byCategory: Record<ComplaintCategory, number>;
+  byStatus: Record<ComplaintStatus, number>;
+}
+
+export const CATEGORY_LABELS: Record<ComplaintCategory, string> = {
+  WATER_SUPPLY: 'Water Supply',
+  ROADS: 'Roads',
+  GARBAGE: 'Garbage',
+  DRAINAGE: 'Drainage',
+  SEWERAGE: 'Sewerage',
+  STREETLIGHTS: 'Streetlights',
+  PARKS: 'Parks',
+  POLLUTION: 'Pollution',
+  ILLEGAL_DUMPING: 'Illegal Dumping',
+  PUBLIC_TOILETS: 'Public Toilets',
+  STRAY_ANIMALS: 'Stray Animals',
+  OTHER: 'Other',
+};
+
+export const STATUS_LABELS: Record<ComplaintStatus, string> = {
+  SUBMITTED: 'Submitted',
+  VERIFIED: 'Verified',
+  ASSIGNED: 'Assigned',
+  IN_PROGRESS: 'In Progress',
+  RESOLVED: 'Resolved',
+  REOPENED: 'Reopened',
+  REJECTED: 'Rejected',
+  DUPLICATE: 'Duplicate',
+};
+
+export const PRIORITY_LABELS: Record<ComplaintPriority, string> = {
+  LOW: 'Low',
+  MEDIUM: 'Medium',
+  HIGH: 'High',
+  URGENT: 'Urgent',
+};

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title>Stats Test</title></head>
+<body>
+<h1>Testing Stats Display</h1>
+<div style="border: 2px solid red; padding: 20px; margin: 20px;">
+  <h2>Should show 4 cards with:</h2>
+  <ul>
+    <li>Total Filed: 15</li>
+    <li>In Progress: 5 (blue)</li>
+    <li>Pending: 5 (orange)</li>
+    <li>Avg Time: 12h (green)</li>
+  </ul>
+</div>
+<div id="actual"></div>
+<script>
+fetch('/api/stats')
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('actual').innerHTML = `
+      <h2>Actual API Response:</h2>
+      <pre>${JSON.stringify(data, null, 2)}</pre>
+      <h3>Calculated Values:</h3>
+      <ul>
+        <li>Total: ${data.total}</li>
+        <li>In Progress: ${data.byStatus.IN_PROGRESS + data.byStatus.ASSIGNED}</li>
+        <li>Pending: ${data.byStatus.SUBMITTED + data.byStatus.VERIFIED}</li>
+        <li>Resolved: ${data.resolved}</li>
+        <li>Avg Time: ${Math.round((data.total / 30) * 24)}h</li>
+      </ul>
+    `;
+  });
+</script>
+</body>
+</html>

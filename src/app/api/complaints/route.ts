@@ -1,0 +1,139 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getDb } from '@/lib/mongodb';
+import { Complaint } from '@/types';
+import { createComplaintSchema, complaintQuerySchema } from '@/lib/validations/complaint';
+import { generateComplaintId } from '@/lib/utils';
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const validatedData = createComplaintSchema.parse(body);
+
+    const db = await getDb();
+    const complaintsCollection = db.collection<Complaint>('complaints');
+
+    const complaint: Complaint = {
+      complaintId: generateComplaintId(),
+      category: validatedData.category,
+      subCategory: validatedData.subCategory,
+      title: validatedData.title,
+      description: validatedData.description,
+      images: validatedData.images,
+      location: validatedData.location,
+      area: validatedData.area,
+      ward: validatedData.ward,
+      pincode: validatedData.pincode,
+      status: 'SUBMITTED',
+      priority: 'MEDIUM',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      anonymous: validatedData.anonymous,
+      citizenName: validatedData.citizenName,
+      citizenPhone: validatedData.citizenPhone,
+      citizenEmail: validatedData.citizenEmail,
+      statusHistory: [
+        {
+          status: 'SUBMITTED',
+          timestamp: new Date(),
+          note: 'Complaint submitted',
+        },
+      ],
+      viewCount: 0,
+    };
+
+    const result = await complaintsCollection.insertOne(complaint as any);
+    
+    return NextResponse.json({
+      success: true,
+      complaintId: complaint.complaintId,
+      id: result.insertedId,
+    }, { status: 201 });
+  } catch (error: any) {
+    console.error('Create complaint error:', error);
+    
+    if (error.name === 'ZodError') {
+      return NextResponse.json(
+        { error: 'Invalid request data', details: error.errors },
+        { status: 400 }
+      );
+    }
+    
+    return NextResponse.json(
+      { error: 'Failed to create complaint' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const queryParams = Object.fromEntries(searchParams.entries());
+    
+    const validatedQuery = complaintQuerySchema.parse(queryParams);
+
+    const db = await getDb();
+    const complaintsCollection = db.collection<Complaint>('complaints');
+
+    const filter: any = {};
+
+    if (validatedQuery.category) filter.category = validatedQuery.category;
+    if (validatedQuery.status) filter.status = validatedQuery.status;
+    if (validatedQuery.area) filter.area = { $regex: validatedQuery.area, $options: 'i' };
+    if (validatedQuery.ward) filter.ward = validatedQuery.ward;
+    if (validatedQuery.pincode) filter.pincode = validatedQuery.pincode;
+    if (validatedQuery.department) filter.department = validatedQuery.department;
+    if (validatedQuery.priority) filter.priority = validatedQuery.priority;
+
+    if (validatedQuery.fromDate || validatedQuery.toDate) {
+      filter.createdAt = {};
+      if (validatedQuery.fromDate) {
+        filter.createdAt.$gte = new Date(validatedQuery.fromDate);
+      }
+      if (validatedQuery.toDate) {
+        filter.createdAt.$lte = new Date(validatedQuery.toDate);
+      }
+    }
+
+    const page = parseInt(validatedQuery.page || '1');
+    const limit = parseInt(validatedQuery.limit || '20');
+    const skip = (page - 1) * limit;
+
+    const sortBy = validatedQuery.sortBy || 'createdAt';
+    const sortOrder = validatedQuery.sortOrder === 'asc' ? 1 : -1;
+
+    const [complaints, total] = await Promise.all([
+      complaintsCollection
+        .find(filter)
+        .sort({ [sortBy]: sortOrder })
+        .skip(skip)
+        .limit(limit)
+        .toArray(),
+      complaintsCollection.countDocuments(filter),
+    ]);
+
+    return NextResponse.json({
+      complaints,
+      pagination: {
+        page,
+        limit,
+        total,
+        pages: Math.ceil(total / limit),
+      },
+    });
+  } catch (error: any) {
+    console.error('Get complaints error:', error);
+    
+    if (error.name === 'ZodError') {
+      return NextResponse.json(
+        { error: 'Invalid query parameters', details: error.errors },
+        { status: 400 }
+      );
+    }
+    
+    return NextResponse.json(
+      { error: 'Failed to fetch complaints' },
+      { status: 500 }
+    );
+  }
+}
