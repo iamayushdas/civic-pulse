@@ -2,9 +2,17 @@ import Link from 'next/link';
 import { LayoutDashboard, FileText, Map, Building2, Users, Settings } from 'lucide-react';
 import { Card, CardContent } from '@/components/brutal/Card';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function getAdminStats() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/stats`, {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : 'http://localhost:3000';
+    
+    const res = await fetch(`${baseUrl}/api/stats`, {
       cache: 'no-store',
     });
     if (!res.ok) throw new Error('Failed to fetch stats');

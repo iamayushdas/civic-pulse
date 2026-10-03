@@ -8,9 +8,17 @@ import { CATEGORY_LABELS, ComplaintCategory } from '@/types';
 import { formatRelativeTime } from '@/lib/utils';
 import { AnimatedMetro, AnimatedBus, AnimatedAutoRickshaw, AnimatedDTCBus, AnimatedCycleRickshaw, AnimatedWaterTanker } from '@/components/home/AnimatedVehicles';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function getStats() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/stats`, {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : 'http://localhost:3000';
+    
+    const res = await fetch(`${baseUrl}/api/stats`, {
       cache: 'no-store',
     });
     if (!res.ok) throw new Error('Failed to fetch stats');
@@ -23,8 +31,12 @@ async function getStats() {
 
 async function getRecentComplaints() {
   try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : 'http://localhost:3000';
+    
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/complaints?limit=8&sortBy=createdAt&sortOrder=desc`,
+      `${baseUrl}/api/complaints?limit=8&sortBy=createdAt&sortOrder=desc`,
       { cache: 'no-store' }
     );
     if (!res.ok) throw new Error('Failed to fetch complaints');
