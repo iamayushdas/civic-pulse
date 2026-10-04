@@ -1,15 +1,15 @@
 'use client';
 
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ArrowLeft, MapPin, User, CheckCircle2, Loader2 } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle2, Loader2, Share2 } from 'lucide-react';
 import { Button } from '@/components/brutal/Button';
 import { Card, CardContent, CardHeader } from '@/components/brutal/Card';
 import { Input, Textarea } from '@/components/brutal/Input';
-import { Select } from '@/components/brutal/Select';
-import { CATEGORY_LABELS, COMPLAINT_CATEGORIES, ComplaintCategory } from '@/types';
+import { CATEGORY_LABELS, COMPLAINT_CATEGORIES, ComplaintCategory, Representative } from '@/types';
 import { useTranslation } from '@/lib/i18n';
 import ImageUpload from '@/components/brutal/ImageUpload';
+import ShareCard from '@/components/brutal/ShareCard';
 
 const LocationPicker = lazy(() => import('@/components/map/LocationPicker'));
 
@@ -41,6 +41,9 @@ export default function ReportPage() {
   const [pincodeLoading, setPincodeLoading] = useState(false);
   const { t } = useTranslation();
   const [draftLoaded, setDraftLoaded] = useState(false);
+  const [representatives, setRepresentatives] = useState<Representative[]>([]);
+  const [repsLoading, setRepsLoading] = useState(false);
+  const draftLoadedRef = useRef(false);
 
   useEffect(() => {
     try {
@@ -53,6 +56,7 @@ export default function ReportPage() {
     } catch (error) {
       console.error('Failed to restore report draft:', error);
     } finally {
+      draftLoadedRef.current = true;
       setDraftLoaded(true);
     }
   }, []);
@@ -153,6 +157,22 @@ export default function ReportPage() {
       const data = await response.json();
       window.localStorage.removeItem('delhi-civic-report-draft');
       setSubmittedId(data.complaintId);
+      
+      // Fetch representatives for sharing
+      if (formData.pincode && formData.category) {
+        setRepsLoading(true);
+        try {
+          const repsResponse = await fetch(`/api/representatives/${formData.pincode}?category=${encodeURIComponent(formData.category)}`);
+          if (repsResponse.ok) {
+            const repsData = await repsResponse.json();
+            setRepresentatives(repsData.representatives || []);
+          }
+        } catch (e) {
+          console.error('Failed to fetch representatives:', e);
+        } finally {
+          setRepsLoading(false);
+        }
+      }
     } catch (error) {
       console.error('Submission error:', error);
       alert('Failed to submit complaint. Please try again.');
@@ -163,7 +183,7 @@ export default function ReportPage() {
   if (submittedId) {
     return (
       <div className="container mx-auto px-4 py-12 sm:py-20">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <Card variant="accent" className="text-civic-white">
             <CardContent className="py-12 text-center">
               <CheckCircle2 size={64} className="mx-auto mb-6" />
@@ -176,7 +196,7 @@ export default function ReportPage() {
               <p className="text-lg mb-8">
                 {t('saveTrackId')}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Button
                   variant="white"
                   size="lg"
@@ -196,6 +216,48 @@ export default function ReportPage() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Social Sharing Card */}
+          {(representatives.length > 0 || repsLoading) && (
+            <Card className="mt-8">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold flex items-center gap-2">
+                    <Share2 size={20} />
+                    AMPLIFY THIS COMPLAINT
+                  </h3>
+                  {repsLoading && (
+                    <div className="text-sm text-civic-muted">LOADING AUTHORITIES…</div>
+                  )}
+                </div>
+              </CardHeader>
+              <CardContent>
+                {!repsLoading && (
+                  <ShareCard
+                    complaint={{
+                      complaintId: submittedId,
+                      category: (formData.category || 'OTHER') as ComplaintCategory,
+                      title: formData.title,
+                      description: formData.description,
+                      images: formData.images,
+                      location: formData.location,
+                      area: formData.area,
+                      ward: formData.ward,
+                      pincode: formData.pincode,
+                      priority: 'MEDIUM' as const,
+                      status: 'SUBMITTED' as const,
+                      createdAt: new Date(),
+                      updatedAt: new Date(),
+                      anonymous: formData.anonymous,
+                      statusHistory: [],
+                      viewCount: 0,
+                    }}
+                    representatives={representatives}
+                  />
+                )}
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     );

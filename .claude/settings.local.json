@@ -72,7 +72,11 @@
       "Bash(npx --yes shadcn@latest init -d)",
       "Bash(npx --yes shadcn@latest add card input label textarea select badge separator tabs avatar progress skeleton tooltip sonner dialog -y)",
       "Bash(npx shadcn *)",
-      "Bash(npx shadcn@latest add chart sheet accordion scroll-area dropdown-menu navigation-menu separator --yes)"
+      "Bash(npx shadcn@latest add chart sheet accordion scroll-area dropdown-menu navigation-menu separator --yes)",
+      "Bash(npx tsc *)",
+      "Bash(git diff *)",
+      "Bash(kill 50542)",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }

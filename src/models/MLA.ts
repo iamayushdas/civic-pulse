@@ -32,5 +32,7 @@ export function toMLAResponse(mla: MLAModel): MLA {
     isActive: mla.isActive,
     pincodes: mla.pincodes,
     assemblyConstituency: mla.assemblyConstituency,
+    x: mla.x,
+    instagram: mla.instagram,
   };
 }

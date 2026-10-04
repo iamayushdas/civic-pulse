@@ -15,11 +15,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110036",
-        "110040"
-      ],
-      "assemblyConstituency": "1 - Narela"
+      "pincodes": ["110036", "110040"],
+      "assemblyConstituency": "1 - Narela",
+      "x": {
+        "handle": "rajkaran4bjp",
+        "url": "https://x.com/rajkaran4bjp",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": "rajkaran.khatri",
+        "url": "https://www.instagram.com/rajkaran.khatri/",
+        "status": "strong",
+        "note": "Primary active account as विधायक नरेला; prior @rajkaran4bjp also associated."
+      }
     },
     {
       "_id": "8125773ed88a822be9331a59",
@@ -36,10 +44,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110084"
-      ],
-      "assemblyConstituency": "2 - Burari"
+      "pincodes": ["110084"],
+      "assemblyConstituency": "2 - Burari",
+      "x": {
+        "handle": "Sanjeev_aap",
+        "url": "https://x.com/Sanjeev_aap",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "93758de705f953455f54f89f",
@@ -56,12 +72,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110007",
-        "110009",
-        "110054"
-      ],
-      "assemblyConstituency": "3 - Timarpur"
+      "pincodes": ["110007", "110009", "110054"],
+      "assemblyConstituency": "3 - Timarpur",
+      "x": {
+        "handle": "SPrakashBjpDel",
+        "url": "https://x.com/SPrakashBjpDel",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "0ffab8b55e7b27ebe71fa4dd",
@@ -78,10 +100,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110033"
-      ],
-      "assemblyConstituency": "4 - Adarsh Nagar"
+      "pincodes": ["110033"],
+      "assemblyConstituency": "4 - Adarsh Nagar",
+      "x": {
+        "handle": "rajbhatia_bjp",
+        "url": "https://x.com/rajbhatia_bjp",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "rajbhatia_bjp",
+        "url": "https://www.instagram.com/rajbhatia_bjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "66ea13dce463ff86c73ac553",
@@ -98,10 +128,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110042"
-      ],
-      "assemblyConstituency": "5 - Badli"
+      "pincodes": ["110042"],
+      "assemblyConstituency": "5 - Badli",
+      "x": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "aab48e159c1973e1d39b29ed",
@@ -118,11 +156,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110085",
-        "110089"
-      ],
-      "assemblyConstituency": "6 - Rithala"
+      "pincodes": ["110085", "110089"],
+      "assemblyConstituency": "6 - Rithala",
+      "x": {
+        "handle": "KulwantRanaBJP",
+        "url": "https://x.com/KulwantRanaBJP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "kulwantranabjp",
+        "url": "https://www.instagram.com/kulwantranabjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "c76fd9f0417ddc8fee4d8c4a",
@@ -139,13 +184,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110039",
-        "110081",
-        "110082",
-        "110086"
-      ],
-      "assemblyConstituency": "7 - Bawana (SC)"
+      "pincodes": ["110039", "110081", "110082", "110086"],
+      "assemblyConstituency": "7 - Bawana (SC)",
+      "x": {
+        "handle": "bjpravinder16",
+        "url": "https://x.com/bjpravinder16",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "iravinderindraj",
+        "url": "https://www.instagram.com/iravinderindraj/",
+        "status": "moderate"
+      }
     },
     {
       "_id": "f492afed945434c8560bb133",
@@ -162,11 +212,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110041",
-        "110081"
-      ],
-      "assemblyConstituency": "8 - Mundka"
+      "pincodes": ["110041", "110081"],
+      "assemblyConstituency": "8 - Mundka",
+      "x": {
+        "handle": "gajendradrall",
+        "url": "https://x.com/gajendradrall",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "gajenderdrall.bjp",
+        "url": "https://www.instagram.com/gajenderdrall.bjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "577954e762f565fff008c00f",
@@ -183,11 +240,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110081",
-        "110086"
-      ],
-      "assemblyConstituency": "9 - Kirari"
+      "pincodes": ["110081", "110086"],
+      "assemblyConstituency": "9 - Kirari",
+      "x": {
+        "handle": "Aniljhavatsmla",
+        "url": "https://x.com/Aniljhavatsmla",
+        "status": "moderate",
+        "alternate_handles": ["AnilJhaVats1", "AnilSJhaMLA"]
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "14c36107689e40f6fb79289e",
@@ -204,10 +269,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110086"
-      ],
-      "assemblyConstituency": "10 - Sultanpur Majra (SC)"
+      "pincodes": ["110086"],
+      "assemblyConstituency": "10 - Sultanpur Majra (SC)",
+      "x": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      },
+      "instagram": {
+        "handle": "mukeshahlawatap",
+        "url": "https://www.instagram.com/mukeshahlawatap/",
+        "status": "strong"
+      }
     },
     {
       "_id": "3c3adb2e679e1de4ee6fb177",
@@ -224,11 +297,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110041",
-        "110087"
-      ],
-      "assemblyConstituency": "11 - Nangloi Jat"
+      "pincodes": ["110041", "110087"],
+      "assemblyConstituency": "11 - Nangloi Jat",
+      "x": {
+        "handle": "ManojShokeenBJP",
+        "url": "https://x.com/ManojShokeenBJP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "manojkumarshokeen_",
+        "url": "https://www.instagram.com/manojkumarshokeen_/",
+        "status": "strong"
+      }
     },
     {
       "_id": "3d276202c24f1822657c0c04",
@@ -245,11 +325,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110083",
-        "110086"
-      ],
-      "assemblyConstituency": "12 - Mangolpuri (SC)"
+      "pincodes": ["110083", "110086"],
+      "assemblyConstituency": "12 - Mangolpuri (SC)",
+      "x": {
+        "handle": "RajkrChauhan95",
+        "url": "https://x.com/RajkrChauhan95",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "rajkumarchauhancongress",
+        "url": "https://www.instagram.com/rajkumarchauhancongress/",
+        "status": "moderate",
+        "note": "Account retains older Congress branding despite current BJP affiliation. Newer activity also under @rajkumarchauhan_95."
+      }
     },
     {
       "_id": "9323997c50686eddaba48b27",
@@ -266,11 +354,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110085",
-        "110089"
-      ],
-      "assemblyConstituency": "13 - Rohini"
+      "pincodes": ["110085", "110089"],
+      "assemblyConstituency": "13 - Rohini",
+      "x": {
+        "handle": "Gupta_vijender",
+        "url": "https://x.com/Gupta_vijender",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "gupta_vijender",
+        "url": "https://www.instagram.com/gupta_vijender/",
+        "status": "low_moderate",
+        "note": "Low-activity account surfaced."
+      }
     },
     {
       "_id": "fac4d3e2de4de375ea35ced9",
@@ -287,11 +383,20 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110034",
-        "110088"
-      ],
-      "assemblyConstituency": "14 - Shalimar Bagh"
+      "pincodes": ["110034", "110088"],
+      "assemblyConstituency": "14 - Shalimar Bagh",
+      "x": {
+        "handle": "gupta_rekha",
+        "url": "https://x.com/gupta_rekha",
+        "status": "strong",
+        "alternate_handles": ["RekhaGuptaCM"]
+      },
+      "instagram": {
+        "handle": "officialrekhagupta",
+        "url": "https://www.instagram.com/officialrekhagupta/",
+        "status": "moderate",
+        "alternate_handles": ["rekha.gupta.official"]
+      }
     },
     {
       "_id": "10bdaaa9b3b0d35ee17e9af7",
@@ -308,11 +413,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110034",
-        "110063"
-      ],
-      "assemblyConstituency": "15 - Shakur Basti"
+      "pincodes": ["110034", "110063"],
+      "assemblyConstituency": "15 - Shakur Basti",
+      "x": {
+        "handle": "KarnailSinghBJP",
+        "url": "https://x.com/KarnailSinghBJP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "karnailsinghbjp",
+        "url": "https://www.instagram.com/karnailsinghbjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "67d44db86161902de07d8d2f",
@@ -329,11 +441,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110034",
-        "110035"
-      ],
-      "assemblyConstituency": "16 - Tri Nagar"
+      "pincodes": ["110034", "110035"],
+      "assemblyConstituency": "16 - Tri Nagar",
+      "x": {
+        "handle": "TilakRamGupta63",
+        "url": "https://x.com/TilakRamGupta63",
+        "status": "strong",
+        "alternate_handles": ["tilakramgupta"]
+      },
+      "instagram": {
+        "handle": "tilakramguptabjp",
+        "url": "https://www.instagram.com/tilakramguptabjp/",
+        "status": "moderate"
+      }
     },
     {
       "_id": "7cf78161e2f2ff5a2d2a03b6",
@@ -350,11 +470,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110035",
-        "110052"
-      ],
-      "assemblyConstituency": "17 - Wazirpur"
+      "pincodes": ["110035", "110052"],
+      "assemblyConstituency": "17 - Wazirpur",
+      "x": {
+        "handle": "PunamSharmaBjp",
+        "url": "https://x.com/PunamSharmaBjp",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "poonamsharmabjp_17",
+        "url": "https://www.instagram.com/poonamsharmabjp_17/",
+        "status": "strong"
+      }
     },
     {
       "_id": "fd2910e2d3748f4cfa8ae9ef",
@@ -371,10 +498,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110009"
-      ],
-      "assemblyConstituency": "18 - Model Town"
+      "pincodes": ["110009"],
+      "assemblyConstituency": "18 - Model Town",
+      "x": {
+        "handle": "AshokGoelBJP",
+        "url": "https://x.com/AshokGoelBJP",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": "ashokgoelbjp",
+        "url": "https://www.instagram.com/ashokgoelbjp/",
+        "status": "moderate"
+      }
     },
     {
       "_id": "4b6b599070d839ae176a8407",
@@ -391,12 +526,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110006",
-        "110007",
-        "110052"
-      ],
-      "assemblyConstituency": "19 - Sadar Bazar"
+      "pincodes": ["110006", "110007", "110052"],
+      "assemblyConstituency": "19 - Sadar Bazar",
+      "x": {
+        "handle": "aapkasomdutt",
+        "url": "https://x.com/aapkasomdutt",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "a232f94f68269964e61e8e9e",
@@ -413,10 +554,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110006"
-      ],
-      "assemblyConstituency": "20 - Chandni Chowk"
+      "pincodes": ["110006"],
+      "assemblyConstituency": "20 - Chandni Chowk",
+      "x": {
+        "handle": "SawhneyParlad",
+        "url": "https://x.com/SawhneyParlad",
+        "status": "low_moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "ca9b473bd831ed3b10aa6f85",
@@ -433,11 +582,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110002",
-        "110006"
-      ],
-      "assemblyConstituency": "21 - Matia Mahal"
+      "pincodes": ["110002", "110006"],
+      "assemblyConstituency": "21 - Matia Mahal",
+      "x": {
+        "handle": "aaleyiqbal",
+        "url": "https://x.com/aaleyiqbal",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "098312172e6e97dde4061ede",
@@ -454,10 +610,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110006"
-      ],
-      "assemblyConstituency": "22 - Ballimaran"
+      "pincodes": ["110006"],
+      "assemblyConstituency": "22 - Ballimaran",
+      "x": {
+        "handle": "ImranHussaain",
+        "url": "https://x.com/ImranHussaain",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "3c607579718a276639aea715",
@@ -474,10 +638,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110005"
-      ],
-      "assemblyConstituency": "23 - Karol Bagh (SC)"
+      "pincodes": ["110005"],
+      "assemblyConstituency": "23 - Karol Bagh (SC)",
+      "x": {
+        "handle": "iamVisheshravi",
+        "url": "https://x.com/iamVisheshravi",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "03c38ddecd6640d11bf491c8",
@@ -494,11 +666,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110008",
-        "110012"
-      ],
-      "assemblyConstituency": "24 - Patel Nagar (SC)"
+      "pincodes": ["110008", "110012"],
+      "assemblyConstituency": "24 - Patel Nagar (SC)",
+      "x": {
+        "handle": "PraveshRatnAPP",
+        "url": "https://x.com/PraveshRatnAPP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "praveshratn",
+        "url": "https://www.instagram.com/praveshratn/",
+        "status": "moderate"
+      }
     },
     {
       "_id": "ca2652da983dafb016339fe4",
@@ -515,10 +694,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110015"
-      ],
-      "assemblyConstituency": "25 - Moti Nagar"
+      "pincodes": ["110015"],
+      "assemblyConstituency": "25 - Moti Nagar",
+      "x": {
+        "handle": "HarishKhuranna",
+        "url": "https://x.com/HarishKhuranna",
+        "status": "needs_verification",
+        "alternate_handles": ["HarishK95894062"]
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "c833e8651ae00869aa011f51",
@@ -535,11 +723,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110027",
-        "110063"
-      ],
-      "assemblyConstituency": "26 - Madipur (SC)"
+      "pincodes": ["110027", "110063"],
+      "assemblyConstituency": "26 - Madipur (SC)",
+      "x": {
+        "handle": "KailashGan34003",
+        "url": "https://x.com/KailashGan34003",
+        "status": "needs_verification"
+      },
+      "instagram": {
+        "handle": "kailash_gangwalofficial",
+        "url": "https://www.instagram.com/kailash_gangwalofficial/",
+        "status": "strong"
+      }
     },
     {
       "_id": "7c142e440778c0b89f9692c9",
@@ -556,11 +751,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110026",
-        "110027"
-      ],
-      "assemblyConstituency": "27 - Rajouri Garden"
+      "pincodes": ["110026", "110027"],
+      "assemblyConstituency": "27 - Rajouri Garden",
+      "x": {
+        "handle": "mssirsa",
+        "url": "https://x.com/mssirsa",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "mssirsa",
+        "url": "https://www.instagram.com/mssirsa/",
+        "status": "strong"
+      }
     },
     {
       "_id": "8d03919a1d44e553b569e0ea",
@@ -577,11 +779,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110018",
-        "110064"
-      ],
-      "assemblyConstituency": "28 - Hari Nagar"
+      "pincodes": ["110018", "110064"],
+      "assemblyConstituency": "28 - Hari Nagar",
+      "x": {
+        "handle": "shyamsharmamla",
+        "url": "https://x.com/shyamsharmamla",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "shyamsharma4bjp",
+        "url": "https://www.instagram.com/shyamsharma4bjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "8ffbadb7d7900fb682998228",
@@ -598,10 +807,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110018"
-      ],
-      "assemblyConstituency": "29 - Tilak Nagar"
+      "pincodes": ["110018"],
+      "assemblyConstituency": "29 - Tilak Nagar",
+      "x": {
+        "handle": "JarnailSinghAAP",
+        "url": "https://x.com/JarnailSinghAAP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "fc0cbb11a0354b07e808a433",
@@ -618,10 +835,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110058"
-      ],
-      "assemblyConstituency": "30 - Janakpuri"
+      "pincodes": ["110058"],
+      "assemblyConstituency": "30 - Janakpuri",
+      "x": {
+        "handle": "ashishsood_bjp",
+        "url": "https://x.com/ashishsood_bjp",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "ashishsood.bjp",
+        "url": "https://www.instagram.com/ashishsood.bjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "0def1764223ebc03d15b52b2",
@@ -638,12 +863,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110018",
-        "110041",
-        "110059"
-      ],
-      "assemblyConstituency": "31 - Vikaspuri"
+      "pincodes": ["110018", "110041", "110059"],
+      "assemblyConstituency": "31 - Vikaspuri",
+      "x": {
+        "handle": "drpankajbjp",
+        "url": "https://x.com/drpankajbjp",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "drpankajkumarsingh",
+        "url": "https://www.instagram.com/drpankajkumarsingh/",
+        "status": "strong"
+      }
     },
     {
       "_id": "630fefa242046c18bdc16d2a",
@@ -660,10 +891,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110059"
-      ],
-      "assemblyConstituency": "32 - Uttam Nagar"
+      "pincodes": ["110059"],
+      "assemblyConstituency": "32 - Uttam Nagar",
+      "x": {
+        "handle": "PawanSharmabjp1",
+        "url": "https://x.com/PawanSharmabjp1",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "fb4ee31ab249aa6de7beeb34",
@@ -680,11 +919,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110046",
-        "110075"
-      ],
-      "assemblyConstituency": "33 - Dwarka"
+      "pincodes": ["110046", "110075"],
+      "assemblyConstituency": "33 - Dwarka",
+      "x": {
+        "handle": "parduymnrajput",
+        "url": "https://x.com/parduymnrajput",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "parduymnrajput",
+        "url": "https://www.instagram.com/parduymnrajput/",
+        "status": "strong"
+      }
     },
     {
       "_id": "afd02e1c8384b33f79abcf96",
@@ -701,10 +947,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110059"
-      ],
-      "assemblyConstituency": "34 - Matiala"
+      "pincodes": ["110059"],
+      "assemblyConstituency": "34 - Matiala",
+      "x": {
+        "handle": "sandeepbjpadv",
+        "url": "https://x.com/sandeepbjpadv",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "466d4742d32a18c54bdc75dc",
@@ -721,10 +975,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110043"
-      ],
-      "assemblyConstituency": "35 - Najafgarh"
+      "pincodes": ["110043"],
+      "assemblyConstituency": "35 - Najafgarh",
+      "x": {
+        "handle": "NeelamS_BJP",
+        "url": "https://x.com/NeelamS_BJP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "neelamshokeenbjp",
+        "url": "https://www.instagram.com/neelamshokeenbjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "0fc83a05393165ef896074e3",
@@ -741,12 +1003,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110037",
-        "110061",
-        "110070"
-      ],
-      "assemblyConstituency": "36 - Bijwasan"
+      "pincodes": ["110037", "110061", "110070"],
+      "assemblyConstituency": "36 - Bijwasan",
+      "x": {
+        "handle": "kgahlot",
+        "url": "https://x.com/kgahlot",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "kailashgahlotofficial",
+        "url": "https://www.instagram.com/kailashgahlotofficial/",
+        "status": "moderate"
+      }
     },
     {
       "_id": "472730f7457b9c0b428496e8",
@@ -763,10 +1031,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110045"
-      ],
-      "assemblyConstituency": "37 - Palam"
+      "pincodes": ["110045"],
+      "assemblyConstituency": "37 - Palam",
+      "x": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      },
+      "instagram": {
+        "handle": "kuldeepsolanki.bjp",
+        "url": "https://www.instagram.com/kuldeepsolanki.bjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "87d7c0c1bc836b1881835f76",
@@ -783,10 +1059,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110010"
-      ],
-      "assemblyConstituency": "38 - Delhi Cantonment"
+      "pincodes": ["110010"],
+      "assemblyConstituency": "38 - Delhi Cantonment",
+      "x": {
+        "handle": "virenderrkadian",
+        "url": "https://x.com/virenderrkadian",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "fe4b75c6dfab09877df3374d",
@@ -803,12 +1087,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110012",
-        "110028",
-        "110060"
-      ],
-      "assemblyConstituency": "39 - Rajinder Nagar"
+      "pincodes": ["110012", "110028", "110060"],
+      "assemblyConstituency": "39 - Rajinder Nagar",
+      "x": {
+        "handle": "Umang_bjp",
+        "url": "https://x.com/Umang_bjp",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "cf74108405ed5e744b9e1b67",
@@ -825,12 +1115,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110001",
-        "110002",
-        "110003"
-      ],
-      "assemblyConstituency": "40 - New Delhi"
+      "pincodes": ["110001", "110002", "110003"],
+      "assemblyConstituency": "40 - New Delhi",
+      "x": {
+        "handle": "p_sahibsingh",
+        "url": "https://x.com/p_sahibsingh",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "parveshsahibsingh",
+        "url": "https://www.instagram.com/parveshsahibsingh/",
+        "status": "strong"
+      }
     },
     {
       "_id": "9c5cfb1eaec1112181769da7",
@@ -847,12 +1143,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110013",
-        "110014",
-        "110024"
-      ],
-      "assemblyConstituency": "41 - Jangpura"
+      "pincodes": ["110013", "110014", "110024"],
+      "assemblyConstituency": "41 - Jangpura",
+      "x": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      },
+      "instagram": {
+        "handle": "tarvindermarwahbjp",
+        "url": "https://www.instagram.com/tarvindermarwahbjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "433f5cda0a533e591507617e",
@@ -869,12 +1171,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110003",
-        "110024",
-        "110049"
-      ],
-      "assemblyConstituency": "42 - Kasturba Nagar"
+      "pincodes": ["110003", "110024", "110049"],
+      "assemblyConstituency": "42 - Kasturba Nagar",
+      "x": {
+        "handle": "basoya_neeraj",
+        "url": "https://x.com/basoya_neeraj",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "06dbffc53632a71b13929234",
@@ -891,11 +1199,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110016",
-        "110017"
-      ],
-      "assemblyConstituency": "43 - Malviya Nagar"
+      "pincodes": ["110016", "110017"],
+      "assemblyConstituency": "43 - Malviya Nagar",
+      "x": {
+        "handle": "upadhyaysbjp",
+        "url": "https://x.com/upadhyaysbjp",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "satishupadhyay",
+        "url": "https://www.instagram.com/satishupadhyay/",
+        "status": "moderate"
+      }
     },
     {
       "_id": "f6e8a7bdc72b34445d96853e",
@@ -912,12 +1227,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110021",
-        "110022",
-        "110067"
-      ],
-      "assemblyConstituency": "44 - R. K. Puram"
+      "pincodes": ["110021", "110022", "110067"],
+      "assemblyConstituency": "44 - R. K. Puram",
+      "x": {
+        "handle": "AnilSharma4BJP",
+        "url": "https://x.com/AnilSharma4BJP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "anilsharma4bjp",
+        "url": "https://www.instagram.com/anilsharma4bjp/",
+        "status": "strong"
+      }
     },
     {
       "_id": "d2230e974ad3a5e2242d69c1",
@@ -934,11 +1255,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110030",
-        "110068"
-      ],
-      "assemblyConstituency": "45 - Mehrauli"
+      "pincodes": ["110030", "110068"],
+      "assemblyConstituency": "45 - Mehrauli",
+      "x": {
+        "handle": "GAJAINDERYDVBJP",
+        "url": "https://x.com/GAJAINDERYDVBJP",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": "gajainderydvbjp",
+        "url": "https://www.instagram.com/gajainderydvbjp/",
+        "status": "moderate"
+      }
     },
     {
       "_id": "a8bfd4896be97ae6e032dfd6",
@@ -955,11 +1283,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110068",
-        "110074"
-      ],
-      "assemblyConstituency": "46 - Chhatarpur"
+      "pincodes": ["110068", "110074"],
+      "assemblyConstituency": "46 - Chhatarpur",
+      "x": {
+        "handle": "kartarbjp46",
+        "url": "https://x.com/kartarbjp46",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "kartarsinghtanwar46",
+        "url": "https://www.instagram.com/kartarsinghtanwar46/",
+        "status": "strong"
+      }
     },
     {
       "_id": "a2e79793a54f4cec22f7bd3e",
@@ -976,10 +1311,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110062"
-      ],
-      "assemblyConstituency": "47 - Deoli (SC)"
+      "pincodes": ["110062"],
+      "assemblyConstituency": "47 - Deoli (SC)",
+      "x": {
+        "handle": "premchauhanofc",
+        "url": "https://x.com/premchauhanofc",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "ce22551f6f34260f036d3b9e",
@@ -996,10 +1339,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110062"
-      ],
-      "assemblyConstituency": "48 - Ambedkar Nagar (SC)"
+      "pincodes": ["110062"],
+      "assemblyConstituency": "48 - Ambedkar Nagar (SC)",
+      "x": {
+        "handle": "AjayDutt48",
+        "url": "https://x.com/AjayDutt48",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "mla_ajaydutt",
+        "url": "https://www.instagram.com/mla_ajaydutt/",
+        "status": "strong"
+      }
     },
     {
       "_id": "d2f059586dc46df3bd1802b9",
@@ -1016,11 +1367,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110062",
-        "110080"
-      ],
-      "assemblyConstituency": "49 - Sangam Vihar"
+      "pincodes": ["110062", "110080"],
+      "assemblyConstituency": "49 - Sangam Vihar",
+      "x": {
+        "handle": "BJPChandankr",
+        "url": "https://x.com/BJPChandankr",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "9a1977dfffdb267bc9347e60",
@@ -1037,11 +1395,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110017",
-        "110048"
-      ],
-      "assemblyConstituency": "50 - Greater Kailash"
+      "pincodes": ["110017", "110048"],
+      "assemblyConstituency": "50 - Greater Kailash",
+      "x": {
+        "handle": "shikkharaibjp",
+        "url": "https://x.com/shikkharaibjp",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "58458b3befdde80b6a6b896c",
@@ -1058,11 +1423,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110019",
-        "110065"
-      ],
-      "assemblyConstituency": "51 - Kalkaji"
+      "pincodes": ["110019", "110065"],
+      "assemblyConstituency": "51 - Kalkaji",
+      "x": {
+        "handle": "AtishiAAP",
+        "url": "https://x.com/AtishiAAP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "atishi",
+        "url": "https://www.instagram.com/atishi/",
+        "status": "moderate",
+        "alternate_handles": ["atishi.aap"]
+      }
     },
     {
       "_id": "8010c704ff3c9ac9eee127d5",
@@ -1079,12 +1452,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110019",
-        "110020",
-        "110044"
-      ],
-      "assemblyConstituency": "52 - Tughlakabad"
+      "pincodes": ["110019", "110020", "110044"],
+      "assemblyConstituency": "52 - Tughlakabad",
+      "x": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "c64e7964b9f0f3e3d4a703ff",
@@ -1101,10 +1480,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110044"
-      ],
-      "assemblyConstituency": "53 - Badarpur"
+      "pincodes": ["110044"],
+      "assemblyConstituency": "53 - Badarpur",
+      "x": {
+        "handle": "ramsinghnetaji",
+        "url": "https://x.com/ramsinghnetaji",
+        "status": "strong",
+        "alternate_handles": ["RamSinghNetaji"]
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "ea44e557c52b9e34337e53e5",
@@ -1121,13 +1509,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110020",
-        "110025",
-        "110065",
-        "110076"
-      ],
-      "assemblyConstituency": "54 - Okhla"
+      "pincodes": ["110020", "110025", "110065", "110076"],
+      "assemblyConstituency": "54 - Okhla",
+      "x": {
+        "handle": "KhanAmanatullah",
+        "url": "https://x.com/KhanAmanatullah",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "amanatullah_khan",
+        "url": "https://www.instagram.com/amanatullah_khan/",
+        "status": "strong"
+      }
     },
     {
       "_id": "abcbd65c0e6bd8327f29f4fd",
@@ -1144,10 +1537,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110091"
-      ],
-      "assemblyConstituency": "55 - Trilokpuri (SC)"
+      "pincodes": ["110091"],
+      "assemblyConstituency": "55 - Trilokpuri (SC)",
+      "x": {
+        "handle": "iRaviKantMLA",
+        "url": "https://x.com/iRaviKantMLA",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "5b30ec4309ae75a39c94615e",
@@ -1164,12 +1565,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110091",
-        "110092",
-        "110096"
-      ],
-      "assemblyConstituency": "56 - Kondli (SC)"
+      "pincodes": ["110091", "110092", "110096"],
+      "assemblyConstituency": "56 - Kondli (SC)",
+      "x": {
+        "handle": "KuldeepKumarAAP",
+        "url": "https://x.com/KuldeepKumarAAP",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "kuldeepkumaraap",
+        "url": "https://www.instagram.com/kuldeepkumaraap/",
+        "status": "strong"
+      }
     },
     {
       "_id": "a70ab80df9ce0b7c19565eb5",
@@ -1186,11 +1593,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110091",
-        "110092"
-      ],
-      "assemblyConstituency": "57 - Patparganj"
+      "pincodes": ["110091", "110092"],
+      "assemblyConstituency": "57 - Patparganj",
+      "x": {
+        "handle": "ravinegi4bjp",
+        "url": "https://x.com/ravinegi4bjp",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "6d630c8c91021f6f52184395",
@@ -1207,10 +1621,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110092"
-      ],
-      "assemblyConstituency": "58 - Laxmi Nagar"
+      "pincodes": ["110092"],
+      "assemblyConstituency": "58 - Laxmi Nagar",
+      "x": {
+        "handle": "abhayvermabjp",
+        "url": "https://x.com/abhayvermabjp",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "abhayvermabjp",
+        "url": "https://www.instagram.com/abhayvermabjp/",
+        "status": "moderate"
+      }
     },
     {
       "_id": "0b8ea991373243142cf84ae0",
@@ -1227,11 +1649,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110032",
-        "110092"
-      ],
-      "assemblyConstituency": "59 - Vishwas Nagar"
+      "pincodes": ["110032", "110092"],
+      "assemblyConstituency": "59 - Vishwas Nagar",
+      "x": {
+        "handle": "opsharmabjp",
+        "url": "https://x.com/opsharmabjp",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "b67ea40c9c87b1f5a246ebdf",
@@ -1248,11 +1677,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110031",
-        "110051"
-      ],
-      "assemblyConstituency": "60 - Krishna Nagar"
+      "pincodes": ["110031", "110051"],
+      "assemblyConstituency": "60 - Krishna Nagar",
+      "x": {
+        "handle": "DrGoyalAnil",
+        "url": "https://x.com/DrGoyalAnil",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "c8f114b0bbe32283c5b1a911",
@@ -1269,11 +1705,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110031",
-        "110051"
-      ],
-      "assemblyConstituency": "61 - Gandhi Nagar"
+      "pincodes": ["110031", "110051"],
+      "assemblyConstituency": "61 - Gandhi Nagar",
+      "x": {
+        "handle": "ArvinderLovely",
+        "url": "https://x.com/ArvinderLovely",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "15a97a74b02274600e20077c",
@@ -1290,11 +1733,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110032",
-        "110095"
-      ],
-      "assemblyConstituency": "62 - Shahdara"
+      "pincodes": ["110032", "110095"],
+      "assemblyConstituency": "62 - Shahdara",
+      "x": {
+        "handle": "BJPSanjayGoyal",
+        "url": "https://x.com/BJPSanjayGoyal",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "647373df6f7f754d5ed901fc",
@@ -1311,11 +1761,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110093",
-        "110095"
-      ],
-      "assemblyConstituency": "63 - Seemapuri (SC)"
+      "pincodes": ["110093", "110095"],
+      "assemblyConstituency": "63 - Seemapuri (SC)",
+      "x": {
+        "handle": "dhingan_e",
+        "url": "https://x.com/dhingan_e",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "ba191341c9cb2d88955a0e61",
@@ -1332,11 +1789,19 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110032",
-        "110093"
-      ],
-      "assemblyConstituency": "64 - Rohtas Nagar"
+      "pincodes": ["110032", "110093"],
+      "assemblyConstituency": "64 - Rohtas Nagar",
+      "x": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      },
+      "instagram": {
+        "handle": "jitendermahajanbjp",
+        "url": "https://www.instagram.com/jitendermahajanbjp/",
+        "status": "strong",
+        "note": "Matched via common public references to Jitender Mahajan / Jitender Kumar for Rohtas Nagar."
+      }
     },
     {
       "_id": "76be68331d33a8ee37d5d084",
@@ -1353,10 +1818,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110053"
-      ],
-      "assemblyConstituency": "65 - Seelampur"
+      "pincodes": ["110053"],
+      "assemblyConstituency": "65 - Seelampur",
+      "x": {
+        "handle": "ChaudhryZubair_",
+        "url": "https://x.com/ChaudhryZubair_",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "chaudhryzubair_",
+        "url": "https://www.instagram.com/chaudhryzubair_/",
+        "status": "strong"
+      }
     },
     {
       "_id": "3ed687ce6209c886d9ed230d",
@@ -1373,10 +1846,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110053"
-      ],
-      "assemblyConstituency": "66 - Ghonda"
+      "pincodes": ["110053"],
+      "assemblyConstituency": "66 - Ghonda",
+      "x": {
+        "handle": "AjayMahawarBJP",
+        "url": "https://x.com/AjayMahawarBJP",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "afe792a09b588d6e5ccf1bf2",
@@ -1393,11 +1874,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110032",
-        "110053"
-      ],
-      "assemblyConstituency": "67 - Babarpur"
+      "pincodes": ["110032", "110053"],
+      "assemblyConstituency": "67 - Babarpur",
+      "x": {
+        "handle": "AapKaGopalRai",
+        "url": "https://x.com/AapKaGopalRai",
+        "status": "moderate"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "ce117fadcd7e1df27e5ce802",
@@ -1414,11 +1902,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110093",
-        "110094"
-      ],
-      "assemblyConstituency": "68 - Gokalpur (SC)"
+      "pincodes": ["110093", "110094"],
+      "assemblyConstituency": "68 - Gokalpur (SC)",
+      "x": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     },
     {
       "_id": "d4f6e243f02439f3604ab504",
@@ -1435,11 +1930,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110090",
-        "110094"
-      ],
-      "assemblyConstituency": "69 - Mustafabad"
+      "pincodes": ["110090", "110094"],
+      "assemblyConstituency": "69 - Mustafabad",
+      "x": {
+        "handle": "bishtmla",
+        "url": "https://x.com/bishtmla",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": "mohansinghmla",
+        "url": "https://www.instagram.com/mohansinghmla/",
+        "status": "strong"
+      }
     },
     {
       "_id": "0f15facd39555d7c5ba28201",
@@ -1456,12 +1958,18 @@
       "termStart": "2025-02-20",
       "termEnd": "2030-02-20",
       "isActive": true,
-      "pincodes": [
-        "110053",
-        "110090",
-        "110094"
-      ],
-      "assemblyConstituency": "70 - Karawal Nagar"
+      "pincodes": ["110053", "110090", "110094"],
+      "assemblyConstituency": "70 - Karawal Nagar",
+      "x": {
+        "handle": "KapilMishra_IND",
+        "url": "https://x.com/KapilMishra_IND",
+        "status": "strong"
+      },
+      "instagram": {
+        "handle": null,
+        "url": null,
+        "status": "not_found"
+      }
     }
   ],
   "deptHeads": [
@@ -1578,6 +2086,7 @@
   ],
   "_notes": {
     "pincodes": "Approximate pincodes per Assembly Constituency, based on the major localities of each AC only; MLA residence/office address pincodes are NOT used. Not derived from boundary/GIS data. Pincodes and AC boundaries overlap, so a pincode can appear under more than one MLA, and some pincodes may be missing. Verify against CEO Delhi polling-station lists or AC/pincode boundary data before strict lookups.",
-    "photoUrl": "Image URLs from PRS India MLA Track, Delhi 8th Assembly (https://prsindia.org/mlatrack?state=Delhi&assembly_term=8), built from the PRS 'Images' filename. name, party and termStart also come from the PRS dataset (delhi_assembly_term_8.csv); PRS spellings of some names differ from common usage."
+    "photoUrl": "Image URLs from PRS India MLA Track, Delhi 8th Assembly (https://prsindia.org/mlatrack?state=Delhi&assembly_term=8), built from the PRS 'Images' filename. name, party and termStart also come from the PRS dataset (delhi_assembly_term_8.csv); PRS spellings of some names differ from common usage.",
+    "socialHandles": "X (Twitter) and Instagram handles merged from independent research (status = attribution confidence). Name variations (e.g. Gajender Singh Daral / Gajender Drall, Jitender Kumar / Jitender Mahajan, Parduymn / Pradyumn) were matched by constituency + public identity."
   }
 }

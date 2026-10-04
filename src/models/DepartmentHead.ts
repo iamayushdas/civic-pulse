@@ -33,5 +33,7 @@ export function toDepartmentHeadResponse(deptHead: DepartmentHeadModel): Departm
     photoUrl: deptHead.photoUrl,
     isActive: deptHead.isActive,
     jurisdiction: deptHead.jurisdiction,
+    x: deptHead.x,
+    instagram: deptHead.instagram,
   };
 }

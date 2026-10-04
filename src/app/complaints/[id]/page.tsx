@@ -4,13 +4,30 @@ import { ArrowLeft, MapPin, Calendar, Eye } from 'lucide-react';
 import { Button } from '@/components/brutal/Button';
 import { Card, CardContent, CardHeader } from '@/components/brutal/Card';
 import { Badge } from '@/components/brutal/Badge';
-import { CATEGORY_LABELS, Complaint, ComplaintCategory } from '@/types';
+import { CATEGORY_LABELS, Complaint, ComplaintCategory, Representative } from '@/types';
 import { formatDate, formatRelativeTime } from '@/lib/utils';
 import ComplaintLocationMap from '@/components/map/ComplaintLocationMapClient';
 import RepresentativesCard from '@/components/brutal/RepresentativesCard';
 import ComplaintEngagement from '@/components/brutal/ComplaintEngagement';
 import SlaCountdown from '@/components/brutal/SlaCountdown';
 import { getDb } from '@/lib/mongodb';
+import { MLACollection, MLAModel } from '@/models/MLA';
+import { DepartmentHeadCollection, DepartmentHeadModel } from '@/models/DepartmentHead';
+import CollapsibleShareCard from '@/components/brutal/CollapsibleShareCard';
+
+const DEPARTMENT_CATEGORY_BY_COMPLAINT: Partial<Record<ComplaintCategory, ComplaintCategory>> = {
+  WATER_SUPPLY: 'WATER_SUPPLY_SEWAGE',
+  DRAINAGE: 'WATER_SUPPLY_SEWAGE',
+  SEWERAGE: 'WATER_SUPPLY_SEWAGE',
+  ROADS: 'MUNICIPAL_CIVIC',
+  GARBAGE: 'MUNICIPAL_CIVIC',
+  STREETLIGHTS: 'MUNICIPAL_CIVIC',
+  PARKS: 'MUNICIPAL_CIVIC',
+  PUBLIC_TOILETS: 'MUNICIPAL_CIVIC',
+  STRAY_ANIMALS: 'MUNICIPAL_CIVIC',
+  POLLUTION: 'POLLUTION_CONTROL',
+  ILLEGAL_DUMPING: 'POLLUTION_CONTROL',
+};
 
 async function getComplaint(id: string): Promise<Complaint | null> {
   try {
@@ -18,10 +35,79 @@ async function getComplaint(id: string): Promise<Complaint | null> {
     const complaintsCollection = db.collection<Complaint>('complaints');
     const normalizedId = id.trim().toUpperCase();
 
-    return await complaintsCollection.findOne({ complaintId: normalizedId });
+    const complaint = await complaintsCollection.findOne({ complaintId: normalizedId });
+    if (!complaint) return null;
+
+    return Object.fromEntries(
+      Object.entries(complaint).filter(([key]) => key !== '_id')
+    ) as unknown as Complaint;
   } catch (error) {
     console.error('Failed to fetch complaint from database:', error);
     return null;
+  }
+}
+
+async function getRepresentatives(pincode: string, category: ComplaintCategory): Promise<Representative[]> {
+  try {
+    const db = await getDb();
+    const mlaCollection = db.collection<MLAModel>(MLACollection);
+    const deptHeadCollection = db.collection<DepartmentHeadModel>(DepartmentHeadCollection);
+
+    const mla = await mlaCollection.findOne({
+      pincodes: pincode,
+      isActive: true,
+    });
+
+    const departmentCategory = DEPARTMENT_CATEGORY_BY_COMPLAINT[category];
+    const departmentHeads = await deptHeadCollection.find({
+      state: 'Delhi',
+      isActive: true,
+      ...(departmentCategory ? { departmentCategory } : {}),
+    }).toArray();
+
+    const representatives: Representative[] = [];
+
+    if (mla) {
+      representatives.push({
+        type: 'MLA',
+        name: mla.name,
+        designation: `MLA - ${mla.constituency}`,
+        party: mla.party,
+        phone: mla.phone,
+        email: mla.email,
+        address: mla.address,
+        photoUrl: mla.photoUrl,
+        jurisdiction: mla.constituency,
+        pincode: pincode,
+        area: mla.constituency,
+        x: mla.x,
+        instagram: mla.instagram,
+      });
+    }
+
+    for (const dept of departmentHeads) {
+      representatives.push({
+        type: 'DEPARTMENT_HEAD',
+        name: dept.name,
+        designation: dept.designation,
+        department: dept.department,
+        phone: dept.phone,
+        email: dept.email,
+        address: dept.officeAddress,
+        photoUrl: dept.photoUrl,
+        jurisdiction: dept.jurisdiction || dept.department,
+        pincode: dept.pincode,
+        area: dept.city || dept.district,
+        ward: dept.ward,
+        x: dept.x,
+        instagram: dept.instagram,
+      });
+    }
+
+    return representatives;
+  } catch (error) {
+    console.error('Failed to fetch representatives:', error);
+    return [];
   }
 }
 
@@ -36,6 +122,10 @@ export default async function ComplaintDetailPage({
   if (!complaint) {
     notFound();
   }
+
+  const representatives = complaint.pincode && complaint.category
+    ? await getRepresentatives(complaint.pincode, complaint.category)
+    : [];
 
   const statusIndex = ['SUBMITTED', 'VERIFIED', 'ASSIGNED', 'IN_PROGRESS', 'RESOLVED'].indexOf(
     complaint.status
@@ -73,6 +163,9 @@ export default async function ComplaintDetailPage({
       </div>
 
       <SlaCountdown dueAt={complaint.slaDueAt} status={complaint.status} />
+
+      {/* Amplify Section - Collapsible */}
+      <CollapsibleShareCard complaint={complaint} representatives={representatives} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Content */}
@@ -252,7 +345,7 @@ export default async function ComplaintDetailPage({
             </Card>
           )}
 
-          <RepresentativesCard pincode={complaint.pincode} category={complaint.category} />
+          <RepresentativesCard representatives={representatives} />
 
           {/* Priority */}
           <Card>

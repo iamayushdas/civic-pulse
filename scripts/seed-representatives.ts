@@ -69,7 +69,7 @@ async function seedRepresentatives() {
       { key: { party: 1 } },
     ]);
     await departmentHeads.createIndexes([
-      { key: { state: 1, department: 1, district: 1 }, unique: true },
+      { key: { state: 1, department: 1, district: 1, designation: 1 }, unique: true },
       { key: { pincode: 1 } },
       { key: { ward: 1 } },
       { key: { departmentCategory: 1 } },

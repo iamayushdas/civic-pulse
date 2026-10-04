@@ -70,6 +70,8 @@ export async function GET(
         jurisdiction: mla.constituency,
         pincode: pincode,
         area: mla.constituency,
+        x: mla.x,
+        instagram: mla.instagram,
       });
     }
 
@@ -88,6 +90,8 @@ export async function GET(
         pincode: dept.pincode,
         area: dept.city || dept.district,
         ward: dept.ward,
+        x: dept.x,
+        instagram: dept.instagram,
       });
     }
 

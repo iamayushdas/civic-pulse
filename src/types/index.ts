@@ -133,6 +133,19 @@ export interface MLA {
   isActive: boolean;
   pincodes?: string[];
   assemblyConstituency?: string;
+  x?: {
+    handle?: string;
+    url?: string;
+    status?: string;
+    alternate_handles?: string[];
+  };
+  instagram?: {
+    handle?: string;
+    url?: string;
+    status?: string;
+    alternate_handles?: string[];
+    note?: string;
+  };
 }
 
 export interface DepartmentHead {
@@ -152,6 +165,19 @@ export interface DepartmentHead {
   photoUrl?: string;
   isActive: boolean;
   jurisdiction?: string;
+  x?: {
+    handle?: string;
+    url?: string;
+    status?: string;
+    alternate_handles?: string[];
+  };
+  instagram?: {
+    handle?: string;
+    url?: string;
+    status?: string;
+    alternate_handles?: string[];
+    note?: string;
+  };
 }
 
 export interface Representative {
@@ -168,6 +194,19 @@ export interface Representative {
   pincode?: string;
   area?: string;
   ward?: string;
+  x?: {
+    handle?: string;
+    url?: string;
+    status?: string;
+    alternate_handles?: string[];
+  };
+  instagram?: {
+    handle?: string;
+    url?: string;
+    status?: string;
+    alternate_handles?: string[];
+    note?: string;
+  };
 }
 
 export interface ComplaintUpdate {
