@@ -20,10 +20,32 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://delhi-civic-alpha.vercel.app'),
   applicationName: 'Delhi Civic',
   title: 'Delhi Civic — Report. Track. Fix.',
   description: 'A public civic platform for Delhi residents to report civic problems and track their resolution.',
   keywords: ['Delhi', 'Civic', 'Complaints', 'Municipal', 'Government', 'Issues'],
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    siteName: 'Delhi Civic',
+    title: 'Delhi Civic — Report. Track. Fix.',
+    description: 'A public civic platform for Delhi residents to report civic problems and track their resolution.',
+    images: [
+      {
+        url: '/apple-touch-icon.png',
+        width: 180,
+        height: 180,
+        alt: 'Delhi Civic logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Delhi Civic — Report. Track. Fix.',
+    description: 'A public civic platform for Delhi residents to report civic problems and track their resolution.',
+    images: ['/apple-touch-icon.png'],
+  },
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },

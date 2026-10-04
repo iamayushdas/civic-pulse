@@ -134,51 +134,51 @@ function InstagramPostLayout({
 }) {
   return (
     <div
-      className="w-[1080px] h-[1080px] border-4 border-black bg-white p-8 font-mono relative flex flex-col"
-      style={{ fontFamily: 'monospace', fontSize: '22px' }}
+      className="w-[1080px] h-[1080px] border-4 border-black bg-white p-10 font-mono relative flex flex-col"
+      style={{ fontFamily: 'monospace', fontSize: '28px' }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-8">
         <div>
           <div>
-            <div className="text-black font-black tracking-widest text-base">DELHI CIVIC PULSE</div>
-            <div className="text-red-600 font-black tracking-widest text-sm">FORMAL NOTICE</div>
+            <div className="text-black font-black tracking-widest text-2xl">DELHI CIVIC PULSE</div>
+            <div className="text-red-600 font-black tracking-widest text-lg">FORMAL NOTICE</div>
           </div>
         </div>
         <div className="text-right">
-          <div className="text-black font-black text-4xl">CASE {complaint.complaintId}</div>
+          <div className="text-black font-black text-5xl">CASE {complaint.complaintId}</div>
         </div>
       </div>
 
       {/* Category Badge */}
-      <div className="flex gap-4 mb-6">
-        <div className="bg-black text-yellow-300 p-4 border-2 border-black flex-1 text-center">
-          <div className="text-xs tracking-wider mb-1">CATEGORY</div>
-          <div className="font-black text-xl">{categoryLabel.toUpperCase()}</div>
+      <div className="flex gap-6 mb-8">
+        <div className="bg-black text-yellow-300 p-6 border-2 border-black flex-1 text-center">
+          <div className="text-lg tracking-wider mb-2">CATEGORY</div>
+          <div className="font-black text-3xl">{categoryLabel.toUpperCase()}</div>
         </div>
-        <div className="bg-red-500 text-white p-4 border-2 border-black flex-1 text-center">
-          <div className="text-xs tracking-wider mb-1">PRIORITY</div>
-          <div className="font-black text-xl">{complaint.priority}</div>
+        <div className="bg-red-500 text-white p-6 border-2 border-black flex-1 text-center">
+          <div className="text-lg tracking-wider mb-2">PRIORITY</div>
+          <div className="font-black text-3xl">{complaint.priority}</div>
         </div>
       </div>
 
       {/* Location & Timeline */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="bg-civic-bg border-2 border-black p-4 col-span-2">
-          <div className="text-xs tracking-wider mb-1 text-black/60">LOCATION</div>
-          <div className="font-bold leading-snug">
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        <div className="bg-civic-bg border-2 border-black p-6 col-span-2">
+          <div className="text-lg tracking-wider mb-2 text-black/60">LOCATION</div>
+          <div className="font-bold text-2xl leading-snug">
             {complaint.area}
             {complaint.ward && <div>Ward: {complaint.ward}</div>}
             {complaint.pincode && <div>{complaint.pincode}</div>}
           </div>
         </div>
-        <div className="bg-yellow-300 border-2 border-black p-4 text-center">
-          <div className="text-xs tracking-wider mb-1">REPORTED</div>
-          <div className="font-bold text-lg">{new Date(complaint.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+        <div className="bg-yellow-300 border-2 border-black p-5 text-center">
+          <div className="text-lg tracking-wider mb-2">REPORTED</div>
+          <div className="font-bold text-2xl">{new Date(complaint.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
         </div>
-        <div className="bg-lime-400 border-2 border-black p-4 text-center">
-          <div className="text-xs tracking-wider mb-1">SLA DUE</div>
-          <div className="font-bold text-lg">
+        <div className="bg-lime-400 border-2 border-black p-5 text-center">
+          <div className="text-lg tracking-wider mb-2">SLA DUE</div>
+          <div className="font-bold text-2xl">
             {(() => {
               const due = new Date(complaint.createdAt);
               due.setDate(due.getDate() + 7);
@@ -189,34 +189,34 @@ function InstagramPostLayout({
       </div>
 
       {/* Issue */}
-      <div className="border-t-2 border-black pt-4 mb-4 flex-1 overflow-hidden">
-        <div className="text-xs tracking-wider mb-2 text-black/60">ISSUE</div>
-        <div className="font-bold text-xl leading-snug">{complaint.title}</div>
-        <div className="mt-3 text-sm leading-relaxed text-black/80">
+      <div className="border-t-2 border-black pt-6 mb-6 flex-1 overflow-hidden">
+        <div className="text-lg tracking-wider mb-3 text-black/60">ISSUE</div>
+        <div className="font-bold text-3xl leading-snug">{complaint.title}</div>
+        <div className="mt-4 text-xl leading-relaxed text-black/80">
           {complaint.description.substring(0, 200)}
           {complaint.description.length > 200 ? '…' : ''}
         </div>
       </div>
 
       {/* Footer */}
-      <div className="border-t-2 border-black pt-4">
-        <div className="bg-black text-white p-3 border-2 border-black text-center mb-3">
-          <div className="text-xs tracking-wider mb-1">TRACK THIS CASE</div>
-          <div className="font-bold text-sm break-all">{buildTrackingUrl(complaint.complaintId)}</div>
+      <div className="border-t-2 border-black pt-6">
+        <div className="bg-black text-white p-5 border-2 border-black text-center mb-4">
+          <div className="text-lg tracking-wider mb-2">TRACK THIS CASE</div>
+          <div className="font-bold text-lg break-all">{buildTrackingUrl(complaint.complaintId)}</div>
         </div>
-        <div className="flex flex-wrap gap-2 justify-center">
+        <div className="flex flex-wrap gap-3 justify-center">
           {shareData.handles.x.slice(0, 4).map((handle, i) => (
-            <span key={`x-${i}`} className="bg-blue-500 text-white px-3 py-1 border-2 border-black text-sm">
+            <span key={`x-${i}`} className="bg-blue-500 text-white px-4 py-2 border-2 border-black text-lg">
               {handle}
             </span>
           ))}
           {shareData.handles.instagram.slice(0, 3).map((handle, i) => (
-            <span key={`ig-${i}`} className="bg-pink-500 text-white px-3 py-1 border-2 border-black text-sm">
+            <span key={`ig-${i}`} className="bg-pink-500 text-white px-4 py-2 border-2 border-black text-lg">
               {handle}
             </span>
           ))}
         </div>
-        <div className="mt-3 text-center text-xs text-black/60 tracking-wider">
+        <div className="mt-4 text-center text-lg text-black/60 tracking-wider">
           #FixMyStreet #DelhiCivicPulse #Accountability
         </div>
       </div>
