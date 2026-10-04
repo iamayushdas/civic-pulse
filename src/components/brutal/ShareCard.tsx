@@ -440,10 +440,24 @@ export default function ShareCard({
 
   const downloadImage = async () => {
     if (!imageUrl) return;
+    const filename = `civic-pulse-${complaint.complaintId}-${mode}.png`;
+    const blob = await fetch(imageUrl).then(response => response.blob());
+    const file = new File([blob], filename, { type: 'image/png' });
+
+    if (navigator.share && navigator.canShare?.({ files: [file] })) {
+      await navigator.share({ files: [file], title: filename });
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = `civic-pulse-${complaint.complaintId}-${mode}.png`;
+    link.href = objectUrl;
+    link.download = filename;
+    link.style.display = 'none';
+    document.body.appendChild(link);
     link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
   };
 
   const shareToX = () => {
@@ -486,6 +500,7 @@ export default function ShareCard({
     <div className={`relative ${className}`}>
       {onImageGenerated && imageUrl && (
         <button
+          type="button"
           onClick={downloadImage}
           disabled={isGenerating}
           title="Download image"
@@ -520,6 +535,7 @@ export default function ShareCard({
             SHARE TO IG STORY
           </button>
           <button
+            type="button"
             onClick={downloadImage}
             disabled={isGenerating || !imageUrl}
             className="bg-yellow-300 text-black px-4 sm:px-6 py-3 border-3 sm:border-4 border-black shadow-[3px_3px_0_0_#000] sm:shadow-[4px_4px_0_0_#000] font-bold text-xs sm:text-sm hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0_0_#000] sm:hover:shadow-[6px_6px_0_0_#000] transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
